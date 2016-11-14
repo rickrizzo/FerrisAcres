@@ -1,0 +1,33 @@
+<h2>Show order</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @order.user_id %>
+  </li>
+
+  <li>
+    <strong>Placed:</strong>
+    <%= @order.placed %>
+  </li>
+
+  <li>
+    <strong>Pickup:</strong>
+    <%= @order.pickup %>
+  </li>
+
+  <li>
+    <strong>Instructions:</strong>
+    <%= @order.instructions %>
+  </li>
+
+  <li>
+    <strong>Ready:</strong>
+    <%= @order.ready %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: order_path(@conn, :edit, @order) %>
+<%= link "Back", to: order_path(@conn, :index) %>
