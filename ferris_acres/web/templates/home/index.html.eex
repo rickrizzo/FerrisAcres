@@ -1,8 +1,0 @@
-<div class="jumbotron">
-  <h2>Welcome to Ferris Acres Creamery</h2>
-  <p>
-    This is a beta test of our online ordering system
-  </p>
-  <button type="button" name="button" class="btn-primary">Order Cake</button>
-  <button type="button" name="button" class="btn-primary">Order Pint</button>
-</div>
