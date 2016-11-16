@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const pg = require('pg');
 const config = {
   database: 'ferris_acres',
@@ -9,9 +10,10 @@ const config = {
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Ferris Acres Creamery' });
 });
 
+// A route for testing the SQL
 router.get('/create_table', (req, res, next) => {
   const client = new pg.Client(config);
   client.connect((err) => {
