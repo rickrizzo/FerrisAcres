@@ -5,6 +5,9 @@
 -- YOU WILL LOSE DATA
 --
 
+-- Create database
+CREATE DATABASE ferris_acres ENCODING 'utf-8';
+
 -- Reset DB
 DROP TABLE users CASCADE;
 DROP TABLE orders CASCADE;
@@ -35,8 +38,7 @@ CREATE TYPE COLOR AS ENUM (
 -- Tables
 CREATE TABLE IF NOT EXISTS users(
   user_id SERIAL PRIMARY KEY,
-  first_name VARCHAR(64) NOT NULL,
-  last_name VARCHAR(64) NOT NULL,
+  name VARCHAR(64) NOT NULL,
   email VARCHAR(140) NOT NULL UNIQUE,
   phone INT
 );

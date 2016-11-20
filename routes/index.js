@@ -3,29 +3,33 @@ const router = express.Router();
 
 const pg = require('pg');
 const config = {
-  database: 'ferris_acres',
   host: 'localhost',
   port: '5432'
 }
 
-/* GET home page. */
+/* GET Home Page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Ferris Acres Creamery' });
 });
 
-// A route for testing the SQL
+/* GET Cake Order Form */
+router.get('/order', (req, res, next) => {
+  res.render('cake_order.pug', { title: 'Ferris Acres Creamery' });
+});
+
+/* Create Database */
 router.get('/create_table', (req, res, next) => {
   const client = new pg.Client(config);
   client.connect((err) => {
     if (err) throw err;
 
-    client.query('CREATE TABLE lastTestPoop (col char(5))', (err, result) => {
-      if (err) throw err;
-      console.log(result.rows[0]);
-      client.end((err) => {
-        if (err) throw err;
-      });
-    });
+    // client.query('CREATE TABLE lastTestPoop (col char(5))', (err, result) => {
+    //   if (err) throw err;
+    //   console.log(result.rows[0]);
+    //   client.end((err) => {
+    //     if (err) throw err;
+    //   });
+    // });
   });
 
   res.end("Connected!");
