@@ -14,5 +14,38 @@ block content
       p
         label(for="phone") Phone:
         input(type="tel", name="phone")
+    fieldset
+      legend Cake Information
       p
-        input(type="submit")
+        label(for="type") Type:
+        input(type="", name="type")
+      p
+        label(for="size") Size:
+        input(type="", name="size")
+      p
+        label(for="fillings") Fillings:
+        input(type="", name="fillings")
+      p
+        label(for="art_description") Art:
+        input(type="", name="art_description")
+      p
+        label(for="colors") Colors:
+        input(type="", name="color_one")
+        input(type="", name="color_two")
+      p
+        label(for="writing") Writing:
+        input(type="", name="writing")
+      p
+        label(for="writing_color") Writing Color:
+        input(type="", name="writing_color")
+    fieldset
+      legend Order Information
+      p
+        label(for="pickup") Pickup Time:
+        input(type="datetime-local" name="pickup")
+      p
+        label(for="instructions") Instructions:
+      p
+        textarea(name="instructions" rows="6" cols="40" placeholder="Any special instructions")
+    p
+      input(type="submit")

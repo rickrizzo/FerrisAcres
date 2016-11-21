@@ -16,22 +16,16 @@ module.exports = {
     req.body.phone = parseInt(req.body.phone);
     client.connect((err) => {
       if (err) { console.log("Error!", err); return; }
-      client.query('INSERT INTO users (name, email, phone) VALUES (\''
-      + req.body.name + '\',\'' +
-      + req.body.email + '\',' +
-      + req.body.phone + ');', (err, result) => {
+      client.query('INSERT INTO users (name, email, phone) VALUES ($1, $2, $3);', [req.body.name, req.body.email, req.body.phone], (err, result) => {
         if (err) {
           if(err.message.includes('duplicate key')) {
-            console.log("DUPLICATE KEY");
-          } else {
-            console.log("Error!", err.message);
-            return;
+            console.log("Duplicate key");
           }
+          console.log("Error!", err);
         }
-        client.end((err) => { console.log("Error!", err); return; });
+        client.end((err) => { if (err) console.log("Error!", err); });
       });
     });
-
     res.json(req.body);
   }
 }

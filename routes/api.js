@@ -10,7 +10,8 @@ const config = {
 }
 
 router.post('/users', (req, res, next) => {
-  userCtrl.createUser(req, res);
+  res.json(req.body);
+  // userCtrl.createUser(req, res);
 });
 
 module.exports = router;
