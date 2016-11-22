@@ -7,7 +7,7 @@ h1 {
   text-align: center;
 }
 
-div {
+section {
   width: 340px;
   margin: 0 auto;
 }
@@ -33,6 +33,9 @@ div {
 }
 
 @media only screen and (max-width: 600px) {
+  section {
+    width: auto;
+  }
   .button {
     width: 100%;
     margin: 10px 0;
