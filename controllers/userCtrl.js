@@ -1,5 +1,7 @@
 const pg = require('pg');
-pg.defaults.ssl = true;
+if(process.env.DATABASE_URL) {
+    pg.defaults.ssl = true;
+}
 pg.defaults.database = process.env.DATABASE_NAME || 'ferris_acres';
 
 module.exports = {
@@ -9,7 +11,7 @@ module.exports = {
     req.body.phone = req.body.phone.replace("-", "");
     req.body.phone = req.body.phone.replace(" ", "");
     req.body.phone = parseInt(req.body.phone);
-    pg.connect(process.env.DATABASE_URL || 'localhost', (err, client) => {
+    pg.connect(process.env.DATABASE_URL || 'ferris_acres', (err, client) => {
       if (err) throw err;
       client.query('INSERT INTO users (name, email, phone) VALUES ($1, $2, $3);', [req.body.name, req.body.email, req.body.phone], (err, result) => {
         if (err) {
