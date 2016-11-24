@@ -19,7 +19,7 @@ DROP TYPE COLOR;
 
 -- Enums
 CREATE TYPE CAKE_TYPE AS ENUM ('Basic', 'Premium');
-CREATE TYPE CAKE_SIZE AS ENUM ('6 Round', '8 Round', '10 Round', 'Sheet', 'Heart');
+CREATE TYPE CAKE_SIZE AS ENUM ('6_Round', '8_Round', '10_Round', 'Sheet', 'Heart');
 CREATE TYPE COLOR AS ENUM (
   'Red',
   'Orange',

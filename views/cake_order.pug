@@ -18,16 +18,24 @@ block content
       legend Cake Information
       p
         label(for="type") Type:
-        input(type="", name="type")
+        select(name="type")
+          option(value="Basic") Basic
+          option(value="Premium") Premium
       p
         label(for="size") Size:
-        input(type="", name="size")
+        select(name="size")
+          each size in sizes
+            option(value= size.name) #{size.display_name} - $#{size.price}
       p
         label(for="fillings") Fillings:
-        input(type="", name="fillings")
+        each filling in fillings
+          br
+          input(type="checkbox", name="filling", value= filling.name)
+          | #{filling.name} - $#{filling.price}
       p
         label(for="art_description") Art:
-        input(type="", name="art_description")
+      p
+        textarea(name="art_description" rows="6" cols="40" placeholder="How would you like it to look?")
       p
         label(for="colors") Colors:
         input(type="", name="color_one")
@@ -42,7 +50,7 @@ block content
       legend Order Information
       p
         label(for="pickup") Pickup Time:
-        input(type="datetime-local" name="pickup")
+        input(type="datetime-local", name="pickup", min= pickup, value= pickup.toLocaleDateString())
       p
         label(for="instructions") Instructions:
       p
