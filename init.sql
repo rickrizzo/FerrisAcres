@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS orders(
   user_id INT NOT NULL REFERENCES users(user_id),
   placed timestamp NOT NULL DEFAULT current_timestamp,
   pickup timestamp NOT NULL,
-  cakd_id INT NOT NULL REFERENCES cakes(cake_id),
+  cake_id INT NOT NULL REFERENCES cakes(cake_id),
   instructions VARCHAR(1000),
   paid BOOLEAN NOT NULL DEFAULT FALSE,
   ready BOOLEAN NOT NULL DEFAULT FALSE
