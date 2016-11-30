@@ -3,7 +3,10 @@ const router = express.Router();
 
 /* GET Home Page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Ferris Acres Creamery'});
+  res.render('index', {
+    title: 'Ferris Acres Creamery',
+    bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css'
+  });
 });
 
 /* GET Cake Order Form */
@@ -38,6 +41,7 @@ router.get('/order', (req, res, next) => {
       'Yellow',
       'Black'
     ],
+    // bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css',
     pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   });
 });

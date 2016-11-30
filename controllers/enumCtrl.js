@@ -37,7 +37,7 @@ module.exports = {
     .then(data => {
       res.status(200).json({
         status: 'success',
-        data: data[0].enum_range,
+        data: data,
         message: 'Retrieved all colors'
       });
     })
