@@ -1,34 +1,45 @@
 const express = require('express');
 const router = express.Router();
 
-const pg = require('pg');
-const config = {
-  database: 'ferris_acres',
-  host: 'localhost',
-  port: '5432'
-}
-
-/* GET home page. */
+/* GET Home Page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Ferris Acres Creamery' });
+  res.render('index', { title: 'Ferris Acres Creamery'});
 });
 
-// A route for testing the SQL
-router.get('/create_table', (req, res, next) => {
-  const client = new pg.Client(config);
-  client.connect((err) => {
-    if (err) throw err;
-
-    client.query('CREATE TABLE lastTestPoop (col char(5))', (err, result) => {
-      if (err) throw err;
-      console.log(result.rows[0]);
-      client.end((err) => {
-        if (err) throw err;
-      });
-    });
+/* GET Cake Order Form */
+router.get('/order', (req, res, next) => {
+  res.render('cake_order.pug', {
+    title: 'Ferris Acres Creamery',
+    sizes: [
+      {'name':'6_Round', 'display_name': '6" Round', 'price':14.5},
+      {'name':'8_Round', 'display_name': '8" Round', 'price':20},
+      {'name':'10_Round', 'display_name': '8" Round','price':27},
+      {'name':'Sheet', 'display_name': 'Sheet', 'price':37},
+      {'name':'Heart', 'display_name': 'Heart', 'price':18.5}
+    ],
+    fillings: [
+      {'name':'Cake Crunch', 'price':0},
+      {'name':'Oreos', 'price':2},
+      {'name':'Chocolate Chunks', 'price':2},
+      {'name':'Fudge', 'price':2},
+      {'name':'Mini Chocolate Chips', 'price':2}
+    ],
+    colors: [
+      'Red',
+      'Orange',
+      'Royal Blue',
+      'Sky Blue',
+      'Purple',
+      'Teal',
+      'Dark Green',
+      'Lime Green',
+      'Pastel Pink',
+      'Hot Pink',
+      'Yellow',
+      'Black'
+    ],
+    pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   });
-
-  res.end("Connected!");
 });
 
 module.exports = router;

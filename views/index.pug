@@ -1,7 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Order cakes and pints online
-  button Order Cake
-  button Order Pint
+  main
+    section
+      p
+        a(href="/order", class="button") Order Cake
+      p
+        a(href="", class="button") Order Pint
+  footer
+    a(href="") Log In
+    a(href="") Contact
+    a(href="") About

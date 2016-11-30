@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  h2 Cake Order Form
+  form(method="post", action="/api/orders")
+    fieldset
+      legend User Information
+      p
+        label(for="name") Name:
+        input(type="text", name="name")
+      p
+        label(for="email") Email:
+        input(type="email", name="email")
+      p
+        label(for="phone") Phone:
+        input(type="tel", name="phone")
+    fieldset
+      legend Cake Information
+      p
+        label(for="type") Type:
+        select(name="type")
+          option(value="Basic") Basic
+          option(value="Premium") Premium
+      p
+        label(for="size") Size:
+        select(name="size")
+          each size in sizes
+            option(value= size.name) #{size.display_name} - $#{size.price}
+      p
+        label(for="fillings") Fillings:
+        each filling in fillings
+          br
+          input(type="checkbox", name="filling", value= filling.name)
+          | #{filling.name} - $#{filling.price}
+      p
+        label(for="art_description") Art:
+      p
+        textarea(name="art_description" rows="6" cols="40" placeholder="Dream up the best cake you can")
+      p
+        label(for="colors") Colors:
+        select(name="color_one")
+          each color in colors
+            option(value= color) #{color}
+        select(name="color_two")
+          each color in colors
+            option(value= color) #{color}
+      p
+        label(for="writing") Writing:
+        input(type="", name="writing")
+      p
+        label(for="writing_color") Writing Color:
+        select(name="writing_color")
+          each color in colors
+            option(value= color) #{color}
+    fieldset
+      legend Order Information
+      p
+        label(for="pickup") Pickup Time:
+        input(type="datetime-local", name="pickup", min= pickup, value= pickup.toLocaleDateString())
+      p
+        label(for="instructions") Instructions:
+      p
+        textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
+    p
+      input(type="submit")

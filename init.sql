@@ -5,6 +5,9 @@
 -- YOU WILL LOSE DATA
 --
 
+-- Create database
+CREATE DATABASE ferris_acres ENCODING 'utf-8';
+
 -- Reset DB
 DROP TABLE users CASCADE;
 DROP TABLE orders CASCADE;
@@ -16,27 +19,13 @@ DROP TYPE COLOR;
 
 -- Enums
 CREATE TYPE CAKE_TYPE AS ENUM ('Basic', 'Premium');
-CREATE TYPE CAKE_SIZE AS ENUM ('6 Round', '8 Round', '10 Round', 'Sheet', 'Heart');
-CREATE TYPE COLOR AS ENUM (
-  'Red',
-  'Orange',
-  'Royal Blue',
-  'Sky Blue',
-  'Purple',
-  'Teal',
-  'Dark Green',
-  'Lime Green',
-  'Pastel Pink',
-  'Hot Pink',
-  'Yellow',
-  'Black'
-);
+CREATE TYPE CAKE_SIZE AS ENUM ('6_Round', '8_Round', '10_Round', 'Sheet', 'Heart');
+CREATE TYPE COLOR AS ENUM ('Red','Orange','Royal Blue','Sky Blue','Purple','Teal','Dark Green','Lime Green','Pastel Pink','Hot Pink','Yellow','Black');
 
 -- Tables
 CREATE TABLE IF NOT EXISTS users(
   user_id SERIAL PRIMARY KEY,
-  first_name VARCHAR(64) NOT NULL,
-  last_name VARCHAR(64) NOT NULL,
+  name VARCHAR(64) NOT NULL,
   email VARCHAR(140) NOT NULL UNIQUE,
   phone INT
 );
@@ -65,7 +54,7 @@ CREATE TABLE IF NOT EXISTS orders(
   user_id INT NOT NULL REFERENCES users(user_id),
   placed timestamp NOT NULL DEFAULT current_timestamp,
   pickup timestamp NOT NULL,
-  cakd_id INT NOT NULL REFERENCES cakes(cake_id),
+  cake_id INT NOT NULL REFERENCES cakes(cake_id),
   instructions VARCHAR(1000),
   paid BOOLEAN NOT NULL DEFAULT FALSE,
   ready BOOLEAN NOT NULL DEFAULT FALSE
