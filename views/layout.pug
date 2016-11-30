@@ -8,7 +8,17 @@ html
     link(rel='stylesheet', href= bootstrap)
     link(rel='stylesheet', href='stylesheets/style.css')
   body
-    header
-      a(href="/")
-        h1= title
+    nav.navbar.navbar-light.bg-faded
+      a.navbar-brand(href='#') Ferris Acres Creamery
+      ul.nav.navbar-nav
+        li.nav-item.active
+          a.nav-link(href='#') Home
+        li.nav-item
+          a.nav-link(href='/order') Order a Cake
+        li.nav-item
+          a.nav-link(href='pint.html') Order a Pint
+        li.nav-item
+          a.nav-link(href='quart.html') Order a Quart
+        li.nav-item
+          a.nav-link(href='cart.html') Cart
     block content
