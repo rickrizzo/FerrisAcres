@@ -24,6 +24,20 @@ router.get('/order', (req, res, next) => {
       {'name':'Fudge', 'price':2},
       {'name':'Mini Chocolate Chips', 'price':2}
     ],
+    colors: [
+      'Red',
+      'Orange',
+      'Royal Blue',
+      'Sky Blue',
+      'Purple',
+      'Teal',
+      'Dark Green',
+      'Lime Green',
+      'Pastel Pink',
+      'Hot Pink',
+      'Yellow',
+      'Black'
+    ],
     pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   });
 });

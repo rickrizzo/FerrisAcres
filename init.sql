@@ -20,20 +20,7 @@ DROP TYPE COLOR;
 -- Enums
 CREATE TYPE CAKE_TYPE AS ENUM ('Basic', 'Premium');
 CREATE TYPE CAKE_SIZE AS ENUM ('6_Round', '8_Round', '10_Round', 'Sheet', 'Heart');
-CREATE TYPE COLOR AS ENUM (
-  'Red',
-  'Orange',
-  'Royal Blue',
-  'Sky Blue',
-  'Purple',
-  'Teal',
-  'Dark Green',
-  'Lime Green',
-  'Pastel Pink',
-  'Hot Pink',
-  'Yellow',
-  'Black'
-);
+CREATE TYPE COLOR AS ENUM ('Red','Orange','Royal Blue','Sky Blue','Purple','Teal','Dark Green','Lime Green','Pastel Pink','Hot Pink','Yellow','Black');
 
 -- Tables
 CREATE TABLE IF NOT EXISTS users(

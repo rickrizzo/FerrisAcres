@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 Cake Order Form
+  h2 Cake Order Form
   form(method="post", action="/api/orders")
     fieldset
       legend User Information
@@ -35,17 +35,23 @@ block content
       p
         label(for="art_description") Art:
       p
-        textarea(name="art_description" rows="6" cols="40" placeholder="How would you like it to look?")
+        textarea(name="art_description" rows="6" cols="40" placeholder="Dream up the best cake you can")
       p
         label(for="colors") Colors:
-        input(type="", name="color_one")
-        input(type="", name="color_two")
+        select(name="color_one")
+          each color in colors
+            option(value= color) #{color}
+        select(name="color_two")
+          each color in colors
+            option(value= color) #{color}
       p
         label(for="writing") Writing:
         input(type="", name="writing")
       p
         label(for="writing_color") Writing Color:
-        input(type="", name="writing_color")
+        select(name="writing_color")
+          each color in colors
+            option(value= color) #{color}
     fieldset
       legend Order Information
       p
@@ -54,6 +60,6 @@ block content
       p
         label(for="instructions") Instructions:
       p
-        textarea(name="instructions" rows="6" cols="40" placeholder="Any special instructions")
+        textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
     p
       input(type="submit")
