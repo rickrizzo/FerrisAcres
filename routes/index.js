@@ -5,7 +5,9 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Ferris Acres Creamery',
-    bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css'
+    bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css',
+    vue: '/modules/vue/dist/vue.min.js',
+    vue_router: '/modules/vue-router/dist/vue-router.min.js'
   });
 });
 

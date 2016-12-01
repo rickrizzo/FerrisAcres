@@ -21,7 +21,22 @@ html
         li.nav-item
           a.nav-link(href='cart.html') Cart
     block content
+    div#app
+      br
+      br
+      br
+      br
+      h1 Hello App
+      p
+        router-link(to="/foo") Go to Foo
+        br
+        router-link(to="/bar") Go to Bar
+      router-view
     footer
       a(href="") Log In
       a(href="") Contact
       a(href="") About
+    //- Scripts
+    script(src= vue)
+    script(src= vue_router)
+    script(src='/javascripts/router.js')
