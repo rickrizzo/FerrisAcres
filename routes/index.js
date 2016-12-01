@@ -10,8 +10,8 @@ router.get('/', (req, res, next) => {
 });
 
 /* GET Cake Order Form */
-router.get('/order', (req, res, next) => {
-  res.render('cake_order.pug', {
+router.get('/order_cake', (req, res, next) => {
+  res.render('cake_order', {
     title: 'Ferris Acres Creamery',
     sizes: [
       {'name':'6_Round', 'display_name': '6" Round', 'price':14.5},
@@ -44,6 +44,10 @@ router.get('/order', (req, res, next) => {
     // bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css',
     pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   });
+});
+
+router.get('/order_pack', (req, res, next) => {
+  res.render('pint_order', {});
 });
 
 module.exports = router;

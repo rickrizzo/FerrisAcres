@@ -8,17 +8,20 @@ html
     link(rel='stylesheet', href= bootstrap)
     link(rel='stylesheet', href='stylesheets/style.css')
   body
+    header
+      h1= title
     nav.navbar.navbar-light.bg-faded
-      a.navbar-brand(href='#') Ferris Acres Creamery
       ul.nav.navbar-nav
         li.nav-item.active
-          a.nav-link(href='#') Home
+          a.nav-link(href='') Home
         li.nav-item
-          a.nav-link(href='/order') Order a Cake
+          a.nav-link(href='/order_cake') Order Cake
         li.nav-item
-          a.nav-link(href='/pint') Order a Pint
-        li.nav-item
-          a.nav-link(href='quart.html') Order a Quart
+          a.nav-link(href='/order_pack') Order Ice Cream
         li.nav-item
           a.nav-link(href='cart.html') Cart
     block content
+    footer
+      a(href="") Log In
+      a(href="") Contact
+      a(href="") About
