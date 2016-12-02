@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET Home Page. */
 router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Ferris Acres Creamery',
@@ -11,8 +10,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-/* GET Cake Order Form */
-router.get('/order_cake', (req, res, next) => {
+router.get('/cake', (req, res, next) => {
   res.render('cake_order', {
     title: 'Ferris Acres Creamery',
     sizes: [
@@ -48,8 +46,20 @@ router.get('/order_cake', (req, res, next) => {
   });
 });
 
-router.get('/order_pack', (req, res, next) => {
+router.get('/icecream', (req, res, next) => {
   res.render('pint_order', {});
+});
+
+router.get('/admin', (req, res, next) => {
+  res.render('admin', {});
+});
+
+router.get('/cart', (req, res, next) => {
+  res.render('cart', {});
+});
+
+router.get('/order', (req, res, next) => {
+  res.render('order', {});
 });
 
 module.exports = router;
