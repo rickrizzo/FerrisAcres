@@ -43,7 +43,7 @@ router.get('/order_cake', (req, res, next) => {
       'Yellow',
       'Black'
     ],
-    // bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css',
+    bootstrap: '/modules/bootstrap/dist/css/bootstrap.min.css',
     pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
   });
 });
