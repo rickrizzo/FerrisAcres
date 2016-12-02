@@ -1,23 +1,25 @@
 extends layout
 
 block content
-  h1 Pint Ordering Form
-//-        .form-group.row
-//-          label.col-sm-6.col-form-label(for='pint-flavor') Available Flavors
-//-        .form-group.row
-//-          .col-sm-6
-//-            select#pint-flavor.form-control
-//-              option(value='Option 1') Vanilla
-//-              option(value='Option 2') Chocolate
-//-              option(value='Option 3') Mint
-//-              option(value='Option 4') Strawberry
-//-              option(value='Option 5') Coffee
-//-        .form-group.row
-//-          .col-sm-12.col-form-label
-//-            label.col-sm-2(for='example-number-input') Quantity
-//-            .col-sm-2S
-//-              input#example-number-input.form-control(type='number', value='0')
-//-      button.btn.btn-secondary(type='button', onclick="addInput('dynamicInput');") Add another Flavor
-//-      .form-group.row
-//-        .col-sm-2.col-form-label
-//-          button.btn.btn-primary(type='submit') Add to Cart
+  h2 Ice Cream Ordering Form
+  form(method="post", action="/api/orders")
+    fieldset
+    p
+      label(for='icecream-size') Choose a size:
+        option(value='0') -- Choose a Size --
+        option(value='pint') Pint
+        option(value='quart') Quart
+    p
+      label(for='flavor') Available Flavors
+        option(value='0') -- Choose a Flavor --
+        option(value='Option 1') Vanilla
+        option(value='Option 2') Chocolate
+        option(value='Option 3') Mint
+        option(value='Option 4') Strawberry
+        option(value='Option 5') Coffee
+    p
+      label(for='quantity') Quantity
+        input(type='number', value='0')
+        button.btn.btn-secondary(type='button', onclick="addInput('dynamicInput');") Add another Flavor
+  p
+    input(type='submit')

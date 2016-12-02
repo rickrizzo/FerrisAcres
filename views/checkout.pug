@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h2 Cake Order Form
+  form(method="post", action="/api/orders")
+    fieldset
+      legend User Information
+      p
+        label(for="name") Name:
+        input(type="text", name="name")
+      p
+        label(for="email") Email:
+        input(type="email", name="email")
+      p
+        label(for="phone") Phone:
+        input(type="tel", name="phone")
+    fieldset
+      legend Order Information
+      p
+        label(for="pickup") Pickup Time:
+        input(type="datetime-local", name="pickup", min= pickup, value= pickup.toLocaleDateString())
+      p
+        label(for="instructions") Instructions:
+      p
+        textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
+    p
+      input(type="submit")
