@@ -1,6 +1,5 @@
 const express = require('express');
 const cakeCtrl = require('../controllers/cakeCtrl.js');
-const enumCtrl = require('../controllers/enumCtrl.js');
 const orderCtrl = require('../controllers/orderCtrl.js');
 const userCtrl = require('../controllers/userCtrl.js');
 const router = express.Router();

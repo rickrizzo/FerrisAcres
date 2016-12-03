@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const enumCtrl = require('../controllers/enumCtrl.js');
+
+enumCtrl.getCakeTypes().then(data => {
+  cakeSizes = data;
+});
 
 router.get('/', (req, res, next) => {
   res.render('index', {
