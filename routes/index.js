@@ -29,7 +29,7 @@ router.get('/cake', (req, res, next) => {
 });
 
 router.get('/icecream', (req, res, next) => {
-  res.render('pint_order', {title: 'Ferris Acres Creamery'});
+  res.render('ice_cream_order', {title: 'Ferris Acres Creamery'});
 });
 
 router.get('/admin', (req, res, next) => {
