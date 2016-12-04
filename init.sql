@@ -22,7 +22,33 @@ CREATE TYPE CAKE_TYPE AS ENUM ('Basic', 'Premium');
 CREATE TYPE CAKE_SIZE AS ENUM ('6_Round', '8_Round', '10_Round', 'Sheet', 'Heart');
 CREATE TYPE COLOR AS ENUM ('Red','Orange','Royal Blue','Sky Blue','Purple','Teal','Dark Green','Lime Green','Pastel Pink','Hot Pink','Yellow','Black');
 CREATE TYPE ICE_CREAM_SIZE AS ENUM('Pint', 'Quart');
-CREATE TYPE ICE_CREAM_FLAVOR AS ENUM('Vanilla', 'Chocolate', 'Strawberry');
+CREATE TYPE ICE_CREAM_FLAVOR AS ENUM(
+  'Bad Habit',
+  'Bada Bing',
+  'Cake Batter',
+  'Campfire',
+  'Chocolate',
+  'Chocolate Chip',
+  'Coc Choc Chunk',
+  'Coffee Almond Fudge',
+  'Cookie Dough',
+  'Cookie Jar',
+  'Cookies and Creme',
+  'Cow Trax',
+  'Dark Chocolate Espresso',
+  'Elvis Dream',
+  'Grasshopper',
+  'MJ Rell',
+  'Mocha Mayhem',
+  'Paradise Found',
+  'PBC Squared',
+  'Razz Swirl Chip',
+  'Route 302 Choc. Moo',
+  'Salty Cow',
+  'Strawberry',
+  'Sweet Cream',
+  'Vanilla'
+);
 
 -- Tables
 CREATE TABLE IF NOT EXISTS users(
@@ -74,3 +100,6 @@ CREATE TABLE IF NOT EXISTS orders(
   paid BOOLEAN NOT NULL DEFAULT FALSE,
   ready BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+-- Preset Cakes
+-- Insert all of the preset cakes on database load

@@ -14,7 +14,7 @@ html
     ul#topnav.navbar
       ul
         li
-          a(href='') Home
+          a(href='/') Home
         li
           a(href='/cake') Order Cake
         li
@@ -26,10 +26,11 @@ html
     h1= title
     main
       block content
-      script(src="https://code.jquery.com/jquery-3.1.1.min.js")
-      script(src="../javascripts/navbar.js")
 
     footer
       a(href="") Log In
       a(href="") Contact
       a(href="/admin") Admin
+      
+    script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+    script(src="../javascripts/navbar.js")

@@ -14,13 +14,13 @@ block content
         label(for="size") Size:
         select(name="size")
           each size in sizes
-            option(value= size.name) #{size.display_name} - $#{size.price}
+            option(value= size.name) #{size.display_name}
       p
         label(for="fillings") Fillings:
         each filling in fillings
           br
           input(type="checkbox", name="filling", value= filling.name)
-          | #{filling.name} - $#{filling.price}
+          | #{filling.name}
       p
         label(for="art_description") Art:
       p
@@ -29,10 +29,10 @@ block content
         label(for="colors") Colors:
         select(name="color_one")
           each color in colors
-            option(value= color) #{color}
+            option(value= color) #{color.name}
         select(name="color_two")
           each color in colors
-            option(value= color) #{color}
+            option(value= color) #{color.name}
       p
         label(for="writing") Writing:
         input(type="", name="writing")
@@ -40,7 +40,7 @@ block content
         label(for="writing_color") Writing Color:
         select(name="writing_color")
           each color in colors
-            option(value= color) #{color}
+            option(value= color) #{color.name}
     p
       input(type="submit")
   script(src="https://code.jquery.com/jquery-3.1.1.min.js")

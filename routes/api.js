@@ -23,16 +23,4 @@ router.get('/users', (req, res, next) => {
   userCtrl.getUsers(req, res, next);
 });
 
-// Enum Operations
-router.get('/enum/cakeTypes', (req, res, next) => {
-  enumCtrl.getCakeTypes(req, res, next);
-});
-
-router.get('/enum/cakeSizes', (req, res, next) => {
-  enumCtrl.getCakeSizes(req, res, next);
-});
-
-router.get('/enum/colors', (req, res, next) => {
-  enumCtrl.getColors(req, res, next);
-});
 module.exports = router;

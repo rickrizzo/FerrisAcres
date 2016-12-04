@@ -1,10 +1,6 @@
 const express = require('express');
+const fs = require('fs');
 const router = express.Router();
-const enumCtrl = require('../controllers/enumCtrl.js');
-
-enumCtrl.getCakeTypes().then(data => {
-  cakeSizes = data;
-});
 
 router.get('/', (req, res, next) => {
   res.render('index', {
@@ -13,58 +9,43 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/cake', (req, res, next) => {
-  res.render('cake_order', {
-    title: 'Ferris Acres Creamery',
-    sizes: [
-      {'name':'6_Round', 'display_name': '6" Round', 'price':14.5},
-      {'name':'8_Round', 'display_name': '8" Round', 'price':20},
-      {'name':'10_Round', 'display_name': '8" Round','price':27},
-      {'name':'Sheet', 'display_name': 'Sheet', 'price':37},
-      {'name':'Heart', 'display_name': 'Heart', 'price':18.5}
-    ],
-    fillings: [
-      {'name':'Cake Crunch', 'price':0},
-      {'name':'Oreos', 'price':2},
-      {'name':'Chocolate Chunks', 'price':2},
-      {'name':'Fudge', 'price':2},
-      {'name':'Mini Chocolate Chips', 'price':2}
-    ],
-    colors: [
-      'Red',
-      'Orange',
-      'Royal Blue',
-      'Sky Blue',
-      'Purple',
-      'Teal',
-      'Dark Green',
-      'Lime Green',
-      'Pastel Pink',
-      'Hot Pink',
-      'Yellow',
-      'Black'
-    ],
-    pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+  fs.readFile('enum/enums.json', function(err, enums) {
+    if (err) throw err;
+    enums = JSON.parse(enums);
+    res.render('cake_order', {
+      title: 'Ferris Acres Creamery',
+      sizes: enums.cake_sizes,
+      fillings: [
+          {'name':'Cake Crunch', 'price':0},
+          {'name':'Oreos', 'price':2},
+          {'name':'Chocolate Chunks', 'price':2},
+          {'name':'Fudge', 'price':2},
+          {'name':'Mini Chocolate Chips', 'price':2}
+        ],
+        colors: enums.colors
+        // pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+    })
   });
 });
 
 router.get('/icecream', (req, res, next) => {
-  res.render('pint_order', {});
+  res.render('pint_order', {title: 'Ferris Acres Creamery'});
 });
 
 router.get('/admin', (req, res, next) => {
-  res.render('admin', {});
+  res.render('admin', {title: 'Ferris Acres Creamery'});
 });
 
 router.get('/cart', (req, res, next) => {
-  res.render('cart', {});
+  res.render('cart', {title: 'Ferris Acres Creamery'});
 });
 
 router.get('/checkout', (req, res, next) => {
-  res.render('checkout', {});
+  res.render('checkout', {title: 'Ferris Acres Creamery'});
 });
 
 router.get('/order', (req, res, next) => {
-  res.render('order', {});
+  res.render('order', {title: 'Ferris Acres Creamery'});
 });
 
 module.exports = router;
