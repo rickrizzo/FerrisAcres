@@ -1,0 +1,20 @@
+extends layout
+block content
+  h2 Cake Order Form
+  form(method="post", action="/api/orders", name="userinfo")
+    fieldset
+      legend User Information
+      p
+        label(for="name") Name:
+        input(type="text", name="name")
+      p
+        label(for="email") Email:
+        input(type="email", name="email")
+      p
+        label(for="phone") Phone:
+        input(type="tel", name="phone")
+    p
+      input(type="submit")
+  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+  script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js')
+  script(src='../javascripts/validate.js')

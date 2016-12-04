@@ -59,6 +59,10 @@ router.get('/cart', (req, res, next) => {
   res.render('cart', {});
 });
 
+router.get('/checkout', (req, res, next) => {
+  res.render('checkout', {});
+});
+
 router.get('/order', (req, res, next) => {
   res.render('order', {});
 });

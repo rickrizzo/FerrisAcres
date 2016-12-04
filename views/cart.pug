@@ -1,3 +1,26 @@
 extends layout
 
 block content
+  form#shopping-cart(action='/cart', method='post')
+    table.shopping-cart
+      thead
+        tr
+          th(scope='col') Item
+          th(scope='col') Qty
+          th(scope='col') Price
+      tbody
+    p#sub-total
+      strong Sub Total
+      | :
+      span#stotal
+    ul#shopping-cart-actions
+      li
+        input#update-cart.btn(type='submit', name='update', value='Update Cart')
+      li
+        input#empty-cart.btn(type='submit', name='delete', value='Empty Cart')
+      li
+        a.btn(href='index.html') Continue Shopping
+      li
+        a.btn(href='checkout.html') Go To Checkout
+  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+  script(src="../public/javascripts/cart.js")

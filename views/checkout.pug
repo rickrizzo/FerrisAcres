@@ -2,7 +2,7 @@ extends layout
 
 block content
   h2 Cake Order Form
-  form(method="post", action="/api/orders")
+  form(method="post", action="/api/orders", name="userinfo")
     fieldset
       legend User Information
       p
@@ -25,3 +25,6 @@ block content
         textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
     p
       input(type="submit")
+  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+  script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js')
+  script(src='../javascripts/validate.js')

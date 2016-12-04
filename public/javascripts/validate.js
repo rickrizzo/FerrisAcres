@@ -1,5 +1,5 @@
 $(function() {
-  $("form[name='cakeorder']").validate({
+  $("form[name='userinfo']").validate({
     rules: {
       name: "required",
       phone: {

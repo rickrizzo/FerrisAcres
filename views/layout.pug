@@ -5,23 +5,30 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title= title
-    //- link(rel='stylesheet', href='/modules/bootstrap/dist/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Lato', rel='stylesheet')
     link(rel='stylesheet', href='stylesheets/style.css')
+    script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+    script(src="../public/javascripts/navbar.js")
+
   body
-    header
-      h1= title
-    nav.navbar.navbar-light.bg-faded
-      ul.nav.navbar-nav
-        li.nav-item.active
-          a.nav-link(href='') Home
-        li.nav-item
-          a.nav-link(href='/cake') Order Cake
-        li.nav-item
-          a.nav-link(href='/icecream') Order Ice Cream
-        li.nav-item
-          a.nav-link(href='/cart') Cart
+    ul#topnav.navbar
+      ul
+        li
+          a(href='') Home
+        li
+          a(href='/cake') Order Cake
+        li
+          a(href='/icecream') Order Ice Cream
+        li
+          a(href='/cart') Cart
+        li.icon
+          a(href='javascript:void(0);', onclick='iconNav()') ☰
+    h1= title
     main
       block content
+      script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+      script(src="../javascripts/navbar.js")
+
     footer
       a(href="") Log In
       a(href="") Contact
