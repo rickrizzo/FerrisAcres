@@ -2,11 +2,11 @@ extends layout
 
 block content
   h2 Ice Cream Ordering Form
-  form(class="add-to-cart", method="post", action="/cart")
+  form(method="post", action="/api/icecreams")
     fieldset
       legend Ice Cream Information
       p
-        label(for='icecream-size') Size: 
+        label(for='icecream-size') Size:
         select(name="icecream-size")
           option(value='0') -- Choose a Size --
           option(value='pint') Pint

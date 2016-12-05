@@ -44,8 +44,7 @@ router.get('/cakes', (req, res, next) => {
 
 // Order Operations
 router.post('/orders', (req, res, next) => {
-  res.json(req.body);
-  // orderCtrl.createOrder(req, res, next);
+  orderCtrl.createOrder(req, res, next);
 });
 
 router.get('/orders', (req, res, next) => {

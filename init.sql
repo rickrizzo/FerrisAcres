@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS cakes(
   color_two COLOR,
   writing VARCHAR(140),
   writing_color COLOR,
-  price MONEY NOT NULL DEFAULT 0,
+  price MONEY NOT NULL DEFAULT 10,
   CHECK(
     writing IS NULL AND writing_color IS NULL OR
     writing IS NOT NULL AND writing_color IS NOT NULL AND
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS ice_cream(
   size ICE_CREAM_SIZE NOT NULL,
   flavor ICE_CREAM_FLAVOR NOT NULL,
   quantity INT NOT NULL,
-  price MONEY NOT NULL DEFAULT 0,
+  price MONEY NOT NULL DEFAULT 5,
   CHECK(
     quantity > 0 AND price::numeric > 0
   )

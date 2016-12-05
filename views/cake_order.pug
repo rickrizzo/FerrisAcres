@@ -2,7 +2,7 @@ extends layout
 
 block content
   h2 Cake Order Form
-  form(method="post", action="/api/cakes", name="cakeorder")
+  form(method="post", action="/api/cakes")
     fieldset
       legend Cake Information
       p
@@ -16,7 +16,7 @@ block content
           each size in sizes
             option(value= size.name) #{size.display_name}
       p
-        label(for="fillings") Fillings: 
+        label(for="fillings") Fillings:
         each filling in fillings
           br
           input(type="checkbox", name="filling", value= filling.name)

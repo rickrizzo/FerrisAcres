@@ -35,7 +35,6 @@ router.get('/cake', (req, res, next) => {
           {'name':'Mini Chocolate Chips', 'price':2}
         ],
       colors: enums.colors
-
     })
   });
 });
@@ -56,8 +55,14 @@ router.get('/cart', (req, res, next) => {
       res.render('cart', {
         title: 'Ferris Acres Creamery',
         order: data,
-        pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+        pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
       });
+    });
+  } else {
+    res.render('cart', {
+      title: 'Ferris Acres Creamery',
+      order: [],
+      pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
     });
   }
 });
@@ -65,5 +70,12 @@ router.get('/cart', (req, res, next) => {
 router.get('/order', (req, res, next) => {
   res.render('order', {title: 'Ferris Acres Creamery'});
 });
+
+router.get('/thanks/:orderid', (req, res, next) => {
+  res.render('thanks', {
+    title: 'Ferris Acres Creamery',
+    order: req.params.orderid
+  });
+})
 
 module.exports = router;

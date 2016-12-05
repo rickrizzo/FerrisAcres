@@ -2,6 +2,8 @@ extends layout
 
 block content
   form(action='api/orders', method='post')
+    if order.length == 0
+      h3 Nothing here yet
     if order.length > 0
       table.shopping-cart
         thead
@@ -14,7 +16,7 @@ block content
           each item in order
             if item.cake_id
               tr
-                td #{item.color_one} #{item.type} Cake
+                td #{item.type} #{item.color_one} & #{item.color_two} Cake
                 td #{item.size.replace('_', '" ')}
                 td 1
                 td #{item.price}
@@ -25,7 +27,10 @@ block content
             td Total
             td
             td #{order.length}
-            td $#{order.reduce(function(total, item) { return Number(String(total.price).replace(/[^0-9\.]+/g,"")) + Number(String(item.price).replace(/[^0-9\.]+/g,"")) })}
+            if order.length == 1
+              td #{order[0].price}
+            if order.length > 1
+              td $#{order.reduce(function(total, item) { return Number(String(total.price).replace(/[^0-9\.]+/g,"")) + Number(String(item.price).replace(/[^0-9\.]+/g,"")) })}.00
 
     if order.length > 0
       fieldset
@@ -41,7 +46,7 @@ block content
           input(type="tel", name="phone")
         p
           label(for="pickup") Pickup Time:
-          input(type="datetime-local", name="pickup", min= pickup, value= pickup.toLocaleDateString())
+          input(type="datetime-local", name="pickup", min= pickup, value= pickup)
         p
           label(for="instructions") Instructions:
         p
