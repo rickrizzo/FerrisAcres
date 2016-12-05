@@ -2,9 +2,9 @@ extends layout
 
 block content
   form(action='api/orders', method='post')
-    if order.length == 0
+    if !cake && !icecream || cake.length == 0 && icecream.length == 0
       h3 Nothing here yet
-    if order.length > 0
+    if cake || icecream
       table.shopping-cart
         thead
           tr
@@ -13,26 +13,29 @@ block content
             th(scope='col') Qty
             th(scope='col') Price
         tbody
-          each item in order
-            if item.cake_id
-              tr
-                td #{item.type} #{item.color_one} & #{item.color_two} Cake
-                td #{item.size.replace('_', '" ')}
-                td 1
-                td #{item.price}
-            if item.ice_cream_id
-              tr
-                td WE ARE NOT READY YET
+          each item in cake
+            tr
+              td #{item.type} #{item.color_one} & #{item.color_two} Cake
+              td #{item.size.replace('_', '" ')}
+              td 1
+              td #{item.price})
+          each item in icecream
+            tr
+              td #{item.flavor} Ice Cream
+              td #{item.size}
+              td #{item.quantity}
+              td #{item.price}
           tr
             td Total
             td
-            td #{order.length}
-            if order.length == 1
-              td #{order[0].price}
-            if order.length > 1
-              td $#{order.reduce(function(total, item) { return Number(String(total.price).replace(/[^0-9\.]+/g,"")) + Number(String(item.price).replace(/[^0-9\.]+/g,"")) })}.00
+            td #{cake.length + icecream.length}
+            if cake.length == 1 && icecream.length == 0
+              td #{cake[0].price}
+            if cake.length == 0 && icecream.length == 1
+              td #{icecream[0].price}
+            if cake.length + icecream.length > 1
+              td $#{sum}.00
 
-    if order.length > 0
       fieldset
         legend Order Information
         p
@@ -52,6 +55,5 @@ block content
         p
           textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
 
-    if order.length > 0
       input(type="submit" class="button" value="Checkout")
       a(href="" class="button") Clear Cart

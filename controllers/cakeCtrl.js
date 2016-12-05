@@ -23,6 +23,9 @@ module.exports = {
     })
   },
   getCakesById: function(ids) {
+    if(ids.length == 0) {
+      ids.push(1000)
+    }
     return db.any(select_id_cake + '(' + ids.join() + ');');
   }
 }
