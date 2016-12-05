@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	
+	h2 Admin Page
+	- var posts = [{id: 27483, date: '10/23/2016', paid: 'yes', finish: 'yes', picked: 'yes'}, {id: 341234, date: '11/11/2016', paid: 'yes', finish: 'yes', picked: 'yes'}, {id: 11234, date: '11/25/2016', paid: 'yes', finish: 'yes', picked: 'yes'}, {id: 564363, date: '12/2/2016', paid: 'no', finish: 'no', picked: 'no'}, {id: 95749 , date: '12/23/2016', paid: 'no', finish: 'no', picked: 'no'}]
+	table
+		thead
+			tr: th: p Order Id
+				th: p Order Due Date
+				th: p Paid For
+				th: p Order Completed
+				th: p Order Picked Up
+				- var o = 0;
+				tbody
+					each orderI, o in posts
+						tr(class=o % 2 == 0 ? 'odd' : 'even')
+							td
+								a(href='/posts/'+ orderI.id) #{orderI.id}
+							td
+								p(href='/posts/'+ orderI.id) #{orderI.date} 
+							td 
+								p(href='/posts/'+ orderI.id) #{orderI.paid}
+							td 
+								p(href='/posts/'+ orderI.id) #{orderI.finish}
+							td 
+								p(href='/posts/'+ orderI.id) #{orderI.picked}

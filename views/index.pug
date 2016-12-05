@@ -1,13 +1,17 @@
 extends layout
 
 block content
-  main
-    section
-      p
-        a(href="/order", class="button") Order Cake
-      p
-        a(href="", class="button") Order Pint
-  footer
-    a(href="") Log In
-    a(href="") Contact
-    a(href="") About
+  section
+    p
+      a(href="/cake", class="button") Order Cake
+    p
+      a(href="/icecream", class="button") Order Ice Cream
+    if orderCount == 0
+      p.lookup
+        label(for="lookup") Lookup Order:
+        input(type="text", name="order_id")
+        input(type="submit" value="Lookup")
+    if orderCount == 1
+      h3 You have #{orderCount} item in your cart
+    if orderCount > 2
+      h3 You have #{orderCount} items in your cart

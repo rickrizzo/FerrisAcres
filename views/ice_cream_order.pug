@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h2 Ice Cream Ordering Form
+  form(method="post", action="/api/icecreams")
+    fieldset
+      legend Ice Cream Information
+      p
+        label(for='icecream-size') Size:
+        select(name="icecream-size")
+          option(value='0') -- Choose a Size --
+          option(value='pint') Pint
+          option(value='quart') Quart
+      p
+        label(for='flavor') Available Flavors
+        select(name="icecream-flavor")
+          option(value='0') -- Choose a Flavor --
+          option(value='Option 1') Vanilla
+          option(value='Option 2') Chocolate
+          option(value='Option 3') Mint
+          option(value='Option 4') Strawberry
+          option(value='Option 5') Coffee
+      p
+        label(for='qty-1') Quantity
+          input(type='number', name="qty-1", id="qty-1", value='1')
+          button.btn.btn-secondary(type='button', onclick="addInput('dynamicInput');") Add another Flavor
+    p
+    input(type='submit', value="Add to cart")
+  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
+  script(src="../javascripts/cart.js")

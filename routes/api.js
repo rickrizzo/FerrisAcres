@@ -1,11 +1,43 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 const cakeCtrl = require('../controllers/cakeCtrl.js');
-const enumCtrl = require('../controllers/enumCtrl.js');
 const orderCtrl = require('../controllers/orderCtrl.js');
 const userCtrl = require('../controllers/userCtrl.js');
 const router = express.Router();
 
 // Cake Operations
+router.post('/cakes', (req, res, next) => {
+  cakeCtrl.createCake(req, res, next).then(data => {
+    var token = '';
+    var cert = fs.readFileSync('private.key', 'utf-8');
+    var cakeOrder = [data[0].cake_id];
+    var iceCreamOrder = [];
+
+    if(req.cookies.ferrisacres) {
+      token = jwt.verify(req.cookies.ferrisacres, cert);
+
+      if(token.cake) {
+        token.cake.forEach(cake => {
+          cakeOrder.push(cake);
+        });
+      }
+
+      if(token.icecream) {
+        token.icecream.forEach(icecream => {
+          iceCreamOrder.push(icecream);
+        })
+      }
+
+    }
+
+    token = jwt.sign({ cake: cakeOrder, icecream: iceCreamOrder }, cert, { expiresIn: '12h' });
+    res.cookie('ferrisacres', token).redirect("/");
+  }).catch(error => {
+    return next(error);
+  });
+});
+
 router.get('/cakes', (req, res, next) => {
   cakeCtrl.getCakes(req, res, next);
 });
@@ -24,12 +56,4 @@ router.get('/users', (req, res, next) => {
   userCtrl.getUsers(req, res, next);
 });
 
-// Enum Operations
-router.get('/enum/cakeTypes', (req, res, next) => {
-  enumCtrl.getCakeTypes(req, res, next);
-});
-
-router.get('/enum/cakeSizes', (req, res, next) => {
-  enumCtrl.getCakeSizes(req, res, next);
-});
 module.exports = router;
