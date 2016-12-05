@@ -11,14 +11,14 @@ block content
             th(scope='col') Item
             th(scope='col') Size
             th(scope='col') Qty
-            th(scope='col') Price
+            th(scope='col') Unit Price
         tbody
           each item in cake
             tr
               td #{item.type} #{item.color_one} & #{item.color_two} Cake
               td #{item.size.replace('_', '" ')}
               td 1
-              td #{item.price})
+              td #{item.price}
           each item in icecream
             tr
               td #{item.flavor} Ice Cream

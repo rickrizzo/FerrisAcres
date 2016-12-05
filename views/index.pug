@@ -7,10 +7,12 @@ block content
     p
       a(href="/icecream", class="button") Order Ice Cream
     if orderCount == 0
-      p.lookup
-        label(for="lookup") Lookup Order:
-        input(type="text", name="order_id")
-        input(type="submit" value="Lookup")
+      form(action='/order' method='GET')
+        p.lookup
+          label(for="lookup") Lookup Order:
+          input(type="text", name="orderid")
+          //- input(type="hidden" name="redirect")
+          input(type="submit" value="Lookup")
     if orderCount == 1
       h3 You have #{orderCount} item in your cart
     if orderCount >= 2

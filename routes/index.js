@@ -4,6 +4,7 @@ const fs = require('fs');
 const router = express.Router();
 const cakeCtrl = require('../controllers/cakeCtrl.js');
 const iceCreamCtrl = require('../controllers/iceCreamCtrl.js');
+const orderCtrl = require('../controllers/orderCtrl.js');
 
 function moneyToInt(money) {
   return Number(String(money).replace(/[^0-9\.]+/g,""));
@@ -15,7 +16,7 @@ function sumPrices(cake, icecream) {
     sum += moneyToInt(item.price);
   });
   icecream.forEach(item => {
-    sum += moneyToInt(item.price);
+    sum += moneyToInt(item.price) * item.quantity;
   })
   return sum;
 }
@@ -68,7 +69,12 @@ router.get('/icecream', (req, res, next) => {
 });
 
 router.get('/admin', (req, res, next) => {
-  res.render('admin', {title: 'Ferris Acres Creamery'});
+  orderCtrl.getOrders(req, res, next).then(data => {
+    res.render('admin', {
+      title: 'Ferris Acres Creamery',
+      orders: data
+    });
+  });
 });
 
 router.get('/cart', (req, res, next) => {
@@ -96,7 +102,7 @@ router.get('/cart', (req, res, next) => {
 });
 
 router.get('/order', (req, res, next) => {
-  res.render('order', {title: 'Ferris Acres Creamery'});
+  orderCtrl.getOrderById(req, res, next);
 });
 
 router.get('/thanks/:orderid', (req, res, next) => {
