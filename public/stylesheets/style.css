@@ -47,6 +47,10 @@ h1 {
   text-decoration: none;
 }
 
+h3 {
+  text-align: center;
+}
+
 section {
   width: 440px;
   margin: 0 auto;

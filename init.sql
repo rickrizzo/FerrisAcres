@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS cakes(
   color_two COLOR,
   writing VARCHAR(140),
   writing_color COLOR,
-  price MONEY NOT NULL DEFAULT 0
+  price MONEY NOT NULL DEFAULT 0,
   CHECK(
     writing IS NULL AND writing_color IS NULL OR
     writing IS NOT NULL AND writing_color IS NOT NULL AND
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS ice_cream(
   size ICE_CREAM_SIZE NOT NULL,
   flavor ICE_CREAM_FLAVOR NOT NULL,
   quantity INT NOT NULL,
-  price MONEY NOT NULL DEFAULT 0
+  price MONEY NOT NULL DEFAULT 0,
   CHECK(
     quantity > 0 AND price::numeric > 0
   )
@@ -94,11 +94,14 @@ CREATE TABLE IF NOT EXISTS orders(
   user_id INT NOT NULL REFERENCES users(user_id),
   placed timestamp NOT NULL DEFAULT current_timestamp,
   pickup timestamp NOT NULL,
-  cake_id INT NOT NULL REFERENCES cakes(cake_id),
-  ice_cream_id INT NOT NULL REFERENCES ice_cream(ice_cream_id),
+  cake_id INT ARRAY[10],
+  ice_cream_id INT ARRAY[10],
   instructions VARCHAR(1000),
   paid BOOLEAN NOT NULL DEFAULT FALSE,
-  ready BOOLEAN NOT NULL DEFAULT FALSE
+  ready BOOLEAN NOT NULL DEFAULT FALSE,
+  CHECK(
+    array_length(cake_id, 1) > 0 OR array_length(ice_cream_id, 1) > 0
+  )
 );
 
 -- Preset Cakes
