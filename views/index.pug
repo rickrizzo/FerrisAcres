@@ -6,10 +6,11 @@ block content
       a(href="/cake", class="button") Order Cake
     p
       a(href="/icecream", class="button") Order Ice Cream
-    p.lookup
-      label(for="lookup") Lookup Order:
-      input(type="text", name="order_id")
-      input(type="submit" value="Lookup")
+    if orderCount == 0
+      p.lookup
+        label(for="lookup") Lookup Order:
+        input(type="text", name="order_id")
+        input(type="submit" value="Lookup")
     if orderCount == 1
       h3 You have #{orderCount} item in your cart
     if orderCount > 2
