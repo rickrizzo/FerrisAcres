@@ -53,6 +53,25 @@ section {
   margin: 0 auto;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+p.lookup{
+  text-align: center;
+}
+
 a {
   color: black;
 }
@@ -63,7 +82,7 @@ a:hover {
 .button {
   font-size: 20px;
   float: left;
-  margin: 0 10px;
+  margin: 10px 10px;
   display: inline-block;
   border-radius: 3px;
   background-color: maroon;

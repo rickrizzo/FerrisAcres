@@ -1,20 +1,31 @@
 extends layout
 block content
-  h2 Cake Order Form
-  form(method="post", action="/api/orders", name="userinfo")
-    fieldset
-      legend User Information
-      p
-        label(for="name") Name:
-        input(type="text", name="name")
-      p
-        label(for="email") Email:
-        input(type="email", name="email")
-      p
-        label(for="phone") Phone:
-        input(type="tel", name="phone")
-    p
-      input(type="submit")
+  h2 Order Lookup
+  table
+    tr
+      th Name
+      th Order Date
+      th Pickup Date
+      th Pickup Time
+      th Order
+      th Details
+
+    tr
+      td Terry Ferris
+      td 12/4/16
+      td 1/14/16
+      td 12:00 pm
+      td 10" Round Ice Cream Cake
+      td "Please draw a shark and write 'Happy Birthday'"
+
+    tr
+      td Terry Ferris
+      td 12/4/16
+      td 1/14/16
+      td 12:00 pm
+      td 2 Pints, 1 Quart
+      td Mint (2), Strawberry
+
   script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js')
   script(src='../javascripts/validate.js')
