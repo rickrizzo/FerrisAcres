@@ -7,7 +7,10 @@ block content
     p
       a(href="/icecream", class="button") Order Ice Cream
     p.lookup
-      label(for="lookup") Lookup Order 
+      label(for="lookup") Lookup Order:
       input(type="text", name="order_id")
       input(type="submit" value="Lookup")
-    h3= message
+    if orderCount == 1
+      h3 You have #{orderCount} item in your cart
+    if orderCount > 2
+      h3 You have #{orderCount} items in your cart

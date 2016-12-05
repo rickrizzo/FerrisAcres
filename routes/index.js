@@ -2,17 +2,20 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const router = express.Router();
+const cakeCtrl = require('../controllers/cakeCtrl.js');
 
 router.get('/', (req, res, next) => {
   var numOrders = 0;
+
   if(req.cookies.ferrisacres) {
     var cert = fs.readFileSync('private.key', 'utf-8');
     var token = jwt.verify(req.cookies.ferrisacres, cert);
     numOrders = token.cake.length + token.icecream.length;
   }
+
   res.render('index', {
     title: 'Ferris Acres Creamery',
-    message: 'You have ' + numOrders + ' items in your cart.'
+    orderCount: numOrders
   });
 });
 
@@ -31,8 +34,8 @@ router.get('/cake', (req, res, next) => {
           {'name':'Fudge', 'price':2},
           {'name':'Mini Chocolate Chips', 'price':2}
         ],
-        colors: enums.colors
-        // pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+      colors: enums.colors
+
     })
   });
 });
@@ -46,11 +49,17 @@ router.get('/admin', (req, res, next) => {
 });
 
 router.get('/cart', (req, res, next) => {
-  res.render('cart', {title: 'Ferris Acres Creamery'});
-});
-
-router.get('/checkout', (req, res, next) => {
-  res.render('checkout', {title: 'Ferris Acres Creamery'});
+  if(req.cookies.ferrisacres) {
+    var cert = fs.readFileSync('private.key', 'utf-8');
+    var token = jwt.verify(req.cookies.ferrisacres, cert);
+    cakeCtrl.getCakesById(token.cake).then( data => {
+      res.render('cart', {
+        title: 'Ferris Acres Creamery',
+        order: data,
+        pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)
+      });
+    });
+  }
 });
 
 router.get('/order', (req, res, next) => {

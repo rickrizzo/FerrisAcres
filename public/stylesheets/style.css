@@ -5,8 +5,7 @@
 
 body {
   padding: 1em;
-  margin: auto;
-  width: 50%;
+  margin: 0;
   font-family: 'Lato', sans-serif;
 }
 
@@ -111,6 +110,9 @@ footer a {
 
 /* Mobile View */
 @media only screen and (max-width: 768px) {
+  body {
+    padding: 0;
+  }
   section {
     width: auto;
   }

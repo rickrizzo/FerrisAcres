@@ -1,26 +1,52 @@
 extends layout
 
 block content
-  form#shopping-cart(action='/cart', method='post')
-    table.shopping-cart
-      thead
-        tr
-          th(scope='col') Item
-          th(scope='col') Qty
-          th(scope='col') Price
-      tbody
-    p#sub-total
-      strong Sub Total
-      | :
-      span#stotal
-    ul#shopping-cart-actions
-      li
-        input#update-cart.btn(type='submit', name='update', value='Update Cart')
-      li
-        input#empty-cart.btn(type='submit', name='delete', value='Empty Cart')
-      li
-        a.btn(href='index.html') Continue Shopping
-      li
-        a.btn(href='checkout.html') Go To Checkout
-  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
-  script(src="../public/javascripts/cart.js")
+  form(action='api/orders', method='post')
+    if order.length > 0
+      table.shopping-cart
+        thead
+          tr
+            th(scope='col') Item
+            th(scope='col') Size
+            th(scope='col') Qty
+            th(scope='col') Price
+        tbody
+          each item in order
+            if item.cake_id
+              tr
+                td #{item.color_one} #{item.type} Cake
+                td #{item.size.replace('_', '" ')}
+                td 1
+                td #{item.price}
+            if item.ice_cream_id
+              tr
+                td WE ARE NOT READY YET
+          tr
+            td Total
+            td
+            td #{order.length}
+            td $#{order.reduce(function(total, item) { return Number(String(total.price).replace(/[^0-9\.]+/g,"")) + Number(String(item.price).replace(/[^0-9\.]+/g,"")) })}
+
+    if order.length > 0
+      fieldset
+        legend Order Information
+        p
+          label(for="name") Name:
+          input(type="text", name="name")
+        p
+          label(for="email") Email:
+          input(type="email", name="email")
+        p
+          label(for="phone") Phone:
+          input(type="tel", name="phone")
+        p
+          label(for="pickup") Pickup Time:
+          input(type="datetime-local", name="pickup", min= pickup, value= pickup.toLocaleDateString())
+        p
+          label(for="instructions") Instructions:
+        p
+          textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
+
+    if order.length > 0
+      input(type="submit" class="button" value="Checkout")
+      a(href="" class="button") Clear Cart

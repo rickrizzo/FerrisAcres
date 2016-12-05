@@ -16,16 +16,19 @@ router.post('/cakes', (req, res, next) => {
 
     if(req.cookies.ferrisacres) {
       token = jwt.verify(req.cookies.ferrisacres, cert);
+
       if(token.cake) {
         token.cake.forEach(cake => {
           cakeOrder.push(cake);
         });
       }
+
       if(token.icecream) {
         token.icecream.forEach(icecream => {
           iceCreamOrder.push(icecream);
         })
       }
+
     }
 
     token = jwt.sign({ cake: cakeOrder, icecream: iceCreamOrder }, cert, { expiresIn: '12h' });
@@ -41,7 +44,8 @@ router.get('/cakes', (req, res, next) => {
 
 // Order Operations
 router.post('/orders', (req, res, next) => {
-  orderCtrl.createOrder(req, res, next);
+  res.json(req.body);
+  // orderCtrl.createOrder(req, res, next);
 });
 
 router.get('/orders', (req, res, next) => {
