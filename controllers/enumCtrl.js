@@ -67,7 +67,7 @@ module.exports = {
       // Color Enum
       let colors = yield t.any(select_all_colors);
       colors[0].enum_range.replace(/[{}]/g, "").split(',').forEach(color => {
-        cakeEnums.colors.push({"name":color.replace(/['"]+/g, '')})
+        cakeEnums.colors.push({name:color.replace(/['"]+/g, '')})
       });
 
       // Ice Cream Size Enum

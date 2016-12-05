@@ -6,16 +6,7 @@ const select_all_cake = 'SELECT * FROM cakes;';
 
 module.exports = {
   createCake: function(req, res, next) {
-    db.any(insert_cake, [req.body.type, req.body.size, req.body.fillings, req.body.art_description, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color])
-    .then(events => {
-      res.status(200).json({
-        status: 'success',
-        message: 'cake created'
-      })
-    })
-    .catch(error => {
-      return next(error);
-    });
+    return db.any(insert_cake, [req.body.type, req.body.size, req.body.fillings, req.body.art_description, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color])
   },
   getCakes: function(req, res, next) {
     db.any(select_all_cake)

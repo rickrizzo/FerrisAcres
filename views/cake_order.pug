@@ -2,14 +2,14 @@ extends layout
 
 block content
   h2 Cake Order Form
-  form(method="post", action="/api/orders", name="cakeorder")
+  form(method="post", action="/api/cakes", name="cakeorder")
     fieldset
       legend Cake Information
       p
         label(for="type") Type:
         select(name="type")
-          option(value="Basic") Basic
-          option(value="Premium") Premium
+          each type in types
+            option(value= type.name) #{type.name}
       p
         label(for="size") Size:
         select(name="size")
@@ -29,10 +29,10 @@ block content
         label(for="colors") Colors:
         select(name="color_one")
           each color in colors
-            option(value= color) #{color.name}
+            option(value= color.name) #{color.name}
         select(name="color_two")
           each color in colors
-            option(value= color) #{color.name}
+            option(value= color.name) #{color.name}
       p
         label(for="writing") Writing:
         input(type="", name="writing")
@@ -40,8 +40,6 @@ block content
         label(for="writing_color") Writing Color:
         select(name="writing_color")
           each color in colors
-            option(value= color) #{color.name}
+            option(value= color.name) #{color.name}
     p
       input(type="submit" value="Add to cart")
-  script(src="https://code.jquery.com/jquery-3.1.1.min.js")
-  script(src="../public/javascripts/cart.js")

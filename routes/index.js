@@ -1,10 +1,18 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
+  var numOrders = 0;
+  if(req.cookies.ferrisacres) {
+    var cert = fs.readFileSync('private.key', 'utf-8');
+    var token = jwt.verify(req.cookies.ferrisacres, cert);
+    numOrders = token.cake.length + token.icecream.length;
+  }
   res.render('index', {
-    title: 'Ferris Acres Creamery'
+    title: 'Ferris Acres Creamery',
+    message: 'You have ' + numOrders + ' items in your cart.'
   });
 });
 
@@ -14,6 +22,7 @@ router.get('/cake', (req, res, next) => {
     enums = JSON.parse(enums);
     res.render('cake_order', {
       title: 'Ferris Acres Creamery',
+      types: enums.cake_types,
       sizes: enums.cake_sizes,
       fillings: [
           {'name':'Cake Crunch', 'price':0},
