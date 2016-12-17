@@ -9,19 +9,21 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
 
   body
-    ul#topnav.navbar
-      ul
-        li
-          a(href='/') Home
-        li
-          a(href='/cake') Order Cake
-        li
-          a(href='/icecream') Order Ice Cream
-        li
-          a(href='/cart') Cart
-        li.icon
-          a(href='javascript:void(0);', onclick='iconNav()') ☰
-    h1= title
+    header
+      ul#topnav.navbar
+        ul
+          li
+            a(href='/') Home
+          li
+            a(href='/cake') Order Cake
+          li
+            a(href='/icecream') Order Ice Cream
+          li
+            a(href='/cart') Cart
+          li.icon
+            a(href='javascript:void(0);', onclick='iconNav()') ☰
+      a(href="/")
+        h1= title
     main
       block content
 

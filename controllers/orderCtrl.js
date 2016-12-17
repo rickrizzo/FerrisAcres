@@ -3,10 +3,14 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const db = pgp(process.env.DATABASE_URL || 'postgres://localhost:5432/ferris_acres');
 
+const userCtrl = require('../controllers/userCtrl.js');
+const cakeCtrl = require('../controllers/cakeCtrl.js');
+const iceCreamCtrl = require('../controllers/iceCreamCtrl.js');
+
 const insert_user = 'INSERT INTO users (name, email, phone) VALUES ($1, $2, $3) ON CONFLICT (email) DO UPDATE SET name = $1, phone = $3 RETURNING user_id;';
-const insert_cake = 'INSERT INTO cakes (type, size, fillings, art_description, color_one, color_two, writing, writing_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING cake_id;';
 const insert_order = 'INSERT INTO orders (user_id, pickup, cake_id, ice_cream_id, instructions) VALUES ($1, $2, $3, $4, $5) RETURNING order_id;';
 
+const get_order_by_id = 'SELECT * FROM orders WHERE order_id = $1;';
 const get_all_order = 'SELECT * FROM orders';
 
 function parsePhoneNumber(phone_number) {
@@ -35,16 +39,23 @@ module.exports = {
     });
   },
   getOrders: function(req, res, next) {
-    db.any(get_all_order)
-    .then(data => {
-      res.status(200).json({
-        status: 'success',
-        data: data,
-        message: 'Retrieved all orders'
+    return db.any(get_all_order);
+  },
+  getOrderById: function(req, res, next) {
+    db.one(get_order_by_id, [req.query.orderid]).then(order => {
+      userCtrl.getUserById(order.user_id).then(user => {
+        cakeCtrl.getCakesById(order.cake_id).then(cakes => {
+          iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(icecreams => {
+            res.render('order', {
+              title: 'Ferris Acres Creamery',
+              order: order,
+              user: user,
+              cakes: cakes,
+              icecreams: icecreams
+            });
+          });
+        });
       });
-    })
-    .catch(error => {
-      return next(error);
     });
   }
 }

@@ -3,6 +3,7 @@ const db = pgp(process.env.DATABASE_URL || 'postgres://localhost:5432/ferris_acr
 
 const insert_user = 'INSERT INTO users (name, email, phone) VALUES ($1, $2, $3) ON CONFLICT (email) DO UPDATE SET name = $1, phone = $3 RETURNING user_id;';
 const select_all_user = 'SELECT * FROM users;';
+const select_user_by_id = 'SELECT * FROM users WHERE user_id = $1;';
 
 function parsePhoneNumber(phone_number) {
   phone_number = phone_number.replace('(', '');
@@ -37,5 +38,8 @@ module.exports = {
     .catch(error => {
       return next(error);
     })
+  },
+  getUserById: function(userid) {
+    return db.one(select_user_by_id, [userid]);
   }
 }

@@ -6,25 +6,26 @@ block content
       th Name
       th Order Date
       th Pickup Date
-      th Pickup Time
       th Order
-      th Details
+      th Size
+      th Quantity
 
-    tr
-      td Terry Ferris
-      td 12/4/16
-      td 1/14/16
-      td 12:00 pm
-      td 10" Round Ice Cream Cake
-      td "Please draw a shark and write 'Happy Birthday'"
-
-    tr
-      td Terry Ferris
-      td 12/4/16
-      td 1/14/16
-      td 12:00 pm
-      td 2 Pints, 1 Quart
-      td Mint (2), Strawberry
+    each item in cakes
+      tr
+        td #{user.name}
+        td #{order.placed.toLocaleString()}
+        td #{order.pickup.toLocaleString()}
+        td #{item.type} #{item.color_one} & #{item.color_two} Cake
+        td #{item.size}
+        td 1
+    each item in icecreams
+      tr
+        td #{user.name}
+        td #{order.placed.toLocaleString()}
+        td #{order.pickup.toLocaleString()}
+        td #{item.flavor} Ice
+        td #{item.size}
+        td #{item.quantity}
 
   script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js')
