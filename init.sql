@@ -200,6 +200,3 @@ CREATE TRIGGER price_added_cakes
 CREATE TRIGGER price_added_ice_cream
   BEFORE INSERT OR UPDATE ON ice_cream
   FOR EACH ROW EXECUTE PROCEDURE calculate_price_ice_cream();
-
--- Test
-INSERT INTO cakes (type, size, fillings, art_description) VALUES ('Basic', 'Heart', '{Oreos}', 'Good Art!');

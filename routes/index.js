@@ -110,6 +110,13 @@ router.get('/thanks/:orderid', (req, res, next) => {
     title: 'Ferris Acres Creamery',
     order: req.params.orderid
   });
-})
+});
+
+router.get('/test', (req, res, next) => {
+  res.render('test', {
+    stylesheet: 'stylesheets/style.css',
+    vueFiles: ['javascripts/manifest.js', 'javascripts/vendor.js', 'javascripts/app.js']
+  });
+});
 
 module.exports = router;
