@@ -1,6 +1,11 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <p>
+      <a href="#" class="button">Cakes</a>
+    </p>
+    <p>
+      <a href="#" class="button">Ice Cream</a>
+    </p>
   </div>
 </template>
 
@@ -8,9 +13,7 @@
 export default {
   name: 'hello',
   data () {
-    return {
-      msg: 'Welcome to Ferris Acres Creamery'
-    }
+    return {}
   }
 }
 </script>

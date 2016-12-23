@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <h1>Ferris Acres Creamery</h1>
     <hello></hello>
     <p>
-      <router-link to="/foo">Go to Foo</router-link>
-      <router-link to="/bar">Go to Bar</router-link>
+      <router-link to="/foo">Go to Foo Link</router-link>
+      <router-link to="/bar">Go to Bar Link</router-link>
     </p>
     <router-view></router-view>
   </div>
