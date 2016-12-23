@@ -2,49 +2,17 @@ const pgp = require('pg-promise')();
 const db = pgp(process.env.DATABASE_URL || 'postgres://localhost:5432/ferris_acres');
 const fs = require('fs');
 
-const select_all_cake_types = 'SELECT enum_range(NULL::CAKE_TYPE);';
-const select_all_cake_sizes = 'SELECT enum_range(NULL::CAKE_SIZE);';
-const select_all_colors = 'SELECT enum_range(NULL::COLOR);';
-const select_all_ice_cream_sizes = 'SELECT enum_range(NULL::ICE_CREAM_SIZE);';
-const select_all_ice_cream_flavors = 'SELECT enum_range(NULL::ICE_CREAM_FLAVOR);';
-
 module.exports = {
-  getCakeTypes: function() {
-    db.any(select_all_cake_types)
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      return error;
-    })
-  },
-  getCakeSizes: function(req, res, next) {
-    db.any(select_all_cake_sizes)
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      return next(error);
-    })
-  },
-  getCakeColors: function(req, res, next) {
-    db.any(select_all_colors)
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      return next(error);
-    })
-  },
   getAllEnums: function() {
     db.task(function * (t) {
       // Variables
-      var cakeEnums = {
+      var dbEnums = {
         cake_types:[],
-        cake_sizes:[],
+        cake_sizes:{},
         colors:[],
         ice_cream_sizes:[],
-        ice_cream_flavors:[]
+        ice_cream_flavors:[],
+        fillings:[]
       };
 
       // Create File
@@ -53,37 +21,51 @@ module.exports = {
       }
 
       // Cake Type Enums
+      const select_all_cake_types = 'SELECT enum_range(NULL::CAKE_TYPE);';
       let cake_types = yield t.any(select_all_cake_types);
       cake_types[0].enum_range.replace(/[{}]/g, "").split(',').forEach(type => {
-        cakeEnums.cake_types.push({"name":type});
+        dbEnums.cake_types.push({"name":type});
       });
 
-      // Cake Size Enum
-      let cake_sizes = yield t.any(select_all_cake_sizes);
-      cake_sizes[0].enum_range.replace(/[{}]/g, "").split(',').forEach(size => {
-        cakeEnums.cake_sizes.push({"name":size, "display_name":size.replace('_', '" ')});
+      const select_all_cake_size_prices = 'SELECT * FROM cake_size_prices;';
+      let cake_sizes = yield t.any(select_all_cake_size_prices, ['Heart']);
+      cake_sizes.forEach(row => {
+        if(!(row.size in dbEnums.cake_sizes)) {
+          dbEnums.cake_sizes[row.size] = {'display_name':row.size.replace('_', '" '), 'pricing':[]};
+        }
+        dbEnums.cake_sizes[row.size].pricing.push({'type':row.type, 'price':row.price});
       });
 
       // Color Enum
+      const select_all_colors = 'SELECT enum_range(NULL::COLOR);';
       let colors = yield t.any(select_all_colors);
       colors[0].enum_range.replace(/[{}]/g, "").split(',').forEach(color => {
-        cakeEnums.colors.push({name:color.replace(/['"]+/g, '')})
+        dbEnums.colors.push({name:color.replace(/['"]+/g, '')})
       });
 
       // Ice Cream Size Enum
-      let ice_sizes = yield t.any(select_all_ice_cream_sizes);
-      ice_sizes[0].enum_range.replace(/[{}]/g, "").split(',').forEach(size => {
-        cakeEnums.ice_cream_sizes.push({"name":size});
+      const select_all_ice_cream_size_prices = 'SELECT * FROM ice_cream_size_prices;';
+      let ice_cream_sizes = yield t.any(select_all_ice_cream_size_prices);
+      ice_cream_sizes.forEach(row => {
+        dbEnums.ice_cream_sizes.push({"name":row.size, "price":row.price});
       });
 
       // Ice Cream Flavor Enum
+      const select_all_ice_cream_flavors = 'SELECT enum_range(NULL::ICE_CREAM_FLAVOR);';
       let ice_flavors = yield t.any(select_all_ice_cream_flavors);
       ice_flavors[0].enum_range.replace(/[{}]/g, "").split(',').forEach(flavor => {
-        cakeEnums.ice_cream_flavors.push({"name":flavor.replace(/['"]+/g, '')});
+        dbEnums.ice_cream_flavors.push({"name":flavor.replace(/['"]+/g, '')});
+      });
+
+      // Fillings Enum
+      const select_all_filling_prices = 'SELECT * FROM filling_prices;';
+      let fillings = yield t.any(select_all_filling_prices);
+      fillings.forEach(row => {
+        dbEnums.fillings.push({"name":row.filling.replace(/['"]+/g, ''), "price":row.price});
       });
 
       // Write File
-      fs.writeFile('enum/enums.json', JSON.stringify(cakeEnums), (err) => {
+      fs.writeFile('enum/enums.json', JSON.stringify(dbEnums), (err) => {
         if (err) {
           console.log("ERROR WRITING:", err);
         }

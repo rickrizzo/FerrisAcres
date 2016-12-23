@@ -13,8 +13,19 @@ block content
       p
         label(for="size") Size:
         select(name="size")
-          each size in sizes
-            option(value= size.name) #{size.display_name}
+          each sizedata, size in sizes
+            option(value= size) #{sizedata.display_name}
+
+      p
+        label(for="flavors") Flavors
+        p
+          select(name="flavor_one")
+            each flavor in flavors
+              option(value= flavor.name) #{flavor.name}
+        p
+          select(name="flavor_two")
+            each flavor in flavors
+              option(value= flavor.name) #{flavor.name}
       p
         label(for="fillings") Fillings:
         each filling in fillings

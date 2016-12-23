@@ -44,13 +44,8 @@ router.get('/cake', (req, res, next) => {
       title: 'Ferris Acres Creamery',
       types: enums.cake_types,
       sizes: enums.cake_sizes,
-      fillings: [
-          {'name':'Cake Crunch', 'price':0},
-          {'name':'Oreos', 'price':2},
-          {'name':'Chocolate Chunks', 'price':2},
-          {'name':'Fudge', 'price':2},
-          {'name':'Mini Chocolate Chips', 'price':2}
-        ],
+      flavors: enums.ice_cream_flavors,
+      fillings: enums.fillings,
       colors: enums.colors
     })
   });
