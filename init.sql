@@ -10,6 +10,8 @@
 DROP TRIGGER IF EXISTS price_added_cakes ON cakes;
 DROP TRIGGER IF EXISTS price_added_ice_cream ON ice_cream;
 
+DROP SEQUENCE random_int_seq;
+
 DROP TABLE IF EXISTS cake_size_prices;
 DROP TABLE IF EXISTS ice_cream_size_prices;
 DROP TABLE IF EXISTS filling_prices;
@@ -61,14 +63,14 @@ CREATE TYPE FLAVOR AS ENUM(
 
 -- Tables
 CREATE TABLE IF NOT EXISTS users(
-  user_id SERIAL PRIMARY KEY,
+  user_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
   name VARCHAR(64) NOT NULL,
   email VARCHAR(140) NOT NULL UNIQUE,
   phone INT
 );
 
 CREATE TABLE IF NOT EXISTS cakes(
-  cake_id SERIAL PRIMARY KEY,
+  cake_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
   cake_number INT,
   cake_name VARCHAR(64),
   type CAKE_TYPE NOT NULL,
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS cakes(
 );
 
 CREATE TABLE IF NOT EXISTS ice_cream(
-  ice_cream_id SERIAL PRIMARY KEY,
+  ice_cream_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
   size ICE_CREAM_SIZE NOT NULL,
   flavor FLAVOR NOT NULL,
   quantity INT NOT NULL,
@@ -101,7 +103,7 @@ CREATE TABLE IF NOT EXISTS ice_cream(
 );
 
 CREATE TABLE IF NOT EXISTS orders(
-  order_id SERIAL PRIMARY KEY,
+  order_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
   user_id INT NOT NULL REFERENCES users(user_id),
   placed timestamp NOT NULL DEFAULT current_timestamp,
   pickup timestamp NOT NULL,
@@ -136,13 +138,25 @@ CREATE TABLE IF NOT EXISTS filling_prices(
 \COPY ice_cream_size_prices FROM 'pricing/icecreamprices.csv' CSV;
 \COPY filling_prices FROM 'pricing/fillingprices.csv' CSV;
 
+-- SEQUENCES
+create sequence random_int_seq;
+
 -- PROCEDURES
 CREATE OR REPLACE FUNCTION calculate_price_cakes()
 RETURNS trigger AS $price_added_cakes$
   BEGIN
     NEW.price = (SELECT price FROM cake_size_prices AS c WHERE c.type = NEW.type AND c.size = NEW.size);
-    NEW.price = NEW.price + (SELECT SUM(p.price) FROM filling_prices AS p WHERE p.filling = ANY(NEW.fillings));
-    RETURN NEW;
+    -- Fillings
+    IF NEW.fillings IS NOT NULL THEN
+      NEW.price = NEW.price + (SELECT SUM(p.price) FROM filling_prices AS p WHERE p.filling = ANY(NEW.fillings));
+    END IF;
+    -- Art
+    IF NEW.art_description IS NOT NULL THEN
+      IF NEW.art_description <> '' THEN
+        NEW.price = NEW.price + MONEY(5);
+      END IF;
+    END IF;
+  RETURN NEW;
   END;
 $price_added_cakes$  LANGUAGE plpgsql;
 
@@ -153,6 +167,32 @@ RETURNS trigger AS $price_added_ice_cream$
     RETURN NEW;
   END;
 $price_added_ice_cream$  LANGUAGE plpgsql;
+
+-- Feistel Cipher taken from http://wiki.postgresql.org/wiki/Pseudo_encrypt
+CREATE OR REPLACE FUNCTION pseudo_encrypt(VALUE int) returns bigint AS $$
+DECLARE
+l1 int;
+l2 int;
+r1 int;
+r2 int;
+i int:=0;
+BEGIN
+  l1:= (VALUE >> 16) & 65535;
+  r1:= VALUE & 65535;
+  WHILE i < 3 LOOP
+    l2 := r1;
+    r2 := l1 # ((((1366.0 * r1 + 150889) % 714025) / 714025.0) * 32767)::int;
+    l1 := l2;
+    r1 := r2;
+    i := i + 1;
+  END LOOP;
+  RETURN ((l1::bigint << 16) + r1);
+END;
+$$ LANGUAGE plpgsql strict immutable;
+
+CREATE OR REPLACE FUNCTION make_random_id() returns bigint as $$
+  select pseudo_encrypt(nextval('random_int_seq')::int)
+$$ language sql;
 
 
 -- TRIGGERS

@@ -78,6 +78,7 @@ router.get('/cart', (req, res, next) => {
     var token = jwt.verify(req.cookies.ferrisacres, cert);
     cakeCtrl.getCakesById(token.cake).then( cakedata => {
       iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
+        console.log(cakedata);
         res.render('cart', {
           title: 'Ferris Acres Creamery',
           cake: cakedata,
