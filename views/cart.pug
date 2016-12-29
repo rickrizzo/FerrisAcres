@@ -9,6 +9,7 @@ block content
         thead
           tr
             th(scope='col') Item
+            th(scope='col') Fillings
             th(scope='col') Size
             th(scope='col') Qty
             th(scope='col') Unit Price
@@ -16,17 +17,20 @@ block content
           each item in cake
             tr
               td #{item.type} #{item.color_one} & #{item.color_two} Cake
+              td #{item.fillings}
               td #{item.size.replace('_', '" ')}
               td 1
               td #{item.price}
           each item in icecream
             tr
               td #{item.flavor} Ice Cream
+              td
               td #{item.size}
               td #{item.quantity}
               td #{item.price}
           tr
             td Total
+            td
             td
             td #{cake.length + icecream.length}
             if cake.length == 1 && icecream.length == 0
@@ -34,7 +38,7 @@ block content
             if cake.length == 0 && icecream.length == 1
               td #{icecream[0].price}
             if cake.length + icecream.length > 1
-              td $#{sum}.00
+              td $#{sum.toFixed(2)}
 
       fieldset
         legend Order Information

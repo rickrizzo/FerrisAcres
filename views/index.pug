@@ -2,16 +2,13 @@ extends layout
 
 block content
   section
-    p
-      a(href="/cake", class="button") Order Cake
-    p
-      a(href="/icecream", class="button") Order Ice Cream
+    a(href="/cake", class="btn") Order Cake
+    a(href="/icecream", class="btn") Order Ice Cream
     if orderCount == 0
       form(action='/order' method='GET')
-        p.lookup
+        p
           label(for="lookup") Lookup Order:
           input(type="text", name="orderid")
-          //- input(type="hidden" name="redirect")
           input(type="submit" value="Lookup")
     if orderCount == 1
       h3 You have #{orderCount} item in your cart

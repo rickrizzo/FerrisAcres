@@ -5,9 +5,13 @@ const insert_cake = 'INSERT INTO cakes (type, size, fillings, art_description, f
 const select_all_cake = 'SELECT * FROM cakes;';
 const select_id_cake = 'SELECT * FROM cakes WHERE cake_id IN ';
 
+function formatFillings(fillings) {
+  return '{"' + fillings.join('","') + '"}';
+}
+
 module.exports = {
   createCake: function(req, res, next) {
-    return db.any(insert_cake, [req.body.type, req.body.size, req.body.fillings, req.body.art_description, req.body.flavor_one, req.body.flavor_two, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color]);
+    return db.any(insert_cake, [req.body.type, req.body.size, formatFillings(req.body.fillings), req.body.art_description, req.body.flavor_one, req.body.flavor_two, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color]);
   },
   getCakes: function(req, res, next) {
     db.any(select_all_cake)

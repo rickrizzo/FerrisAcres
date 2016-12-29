@@ -5,23 +5,22 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title= title
-    link(href='https://fonts.googleapis.com/css?family=Lato', rel='stylesheet')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,700', rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/main.css')
 
   body
     header
-      ul#topnav.navbar
+      nav
         ul
-          li
-            a(href='/') Home
-          li
-            a(href='/cake') Order Cake
-          li
-            a(href='/icecream') Order Ice Cream
-          li
-            a(href='/cart') Cart
-          li.icon
-            a(href='javascript:void(0);', onclick='iconNav()') ☰
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/cake') Order Cake
+            li
+              a(href='/icecream') Order Ice Cream
+            li
+              a(href='/cart') Cart
       a(href="/")
         h1= title
     main
@@ -29,5 +28,5 @@ html
 
     footer
       a(href="") Log In
-      a(href="mailto:russor3@rpi.edu?subject=Not Paying Attention in MITR&body=Hi Team 8,%0D%0AI was too busy playing with your site!%0D%0AXOXO,%0D%0A") Contact
+      a(href="mailto:russor3@rpi.edu?subject=Website Help") Contact
       a(href="/admin") Admin
