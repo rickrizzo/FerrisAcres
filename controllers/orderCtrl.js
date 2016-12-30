@@ -44,18 +44,19 @@ module.exports = {
   getOrderById: function(req, res, next, getOrderCount) {
     db.one(get_order_by_id, [req.query.orderid]).then(order => {
       userCtrl.getUserById(order.user_id).then(user => {
-        cakeCtrl.getCakesById(order.cake_id).then(cakes => {
-          iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(icecreams => {
-            res.render('order', {
-              title: 'Ferris Acres Creamery',
-              order: order,
-              user: user,
-              cakes: cakes,
-              icecreams: icecreams,
-              orderCount: getOrderCount(req)
-            });
-          });
-        });
+        res.status('200').json(order, user);
+        // cakeCtrl.getCakesById(order.cake_id).then(cakes => {
+        //   iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(icecreams => {
+        //     res.render('order', {
+        //       title: 'Ferris Acres Creamery',
+        //       order: order,
+        //       user: user,
+        //       cakes: cakes,
+        //       icecreams: icecreams,
+        //       orderCount: getOrderCount(req)
+        //     });
+        //   });
+        // });
       });
     });
   }

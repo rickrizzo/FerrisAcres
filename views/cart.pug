@@ -3,7 +3,7 @@ extends layout
 block content
   form(action='api/orders', method='post')
     if !cake && !icecream || cake.length == 0 && icecream.length == 0
-      h3 Nothing here yet
+      h3 Cart is empty.
     if cake || icecream
       table.shopping-cart
         thead
@@ -60,4 +60,6 @@ block content
           textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
 
       input(type="submit" class="btn" value="Checkout")
-      a(href="" class="btn") Clear Cart
+      a(id='clearcart' href='' class='btn') Clear Cart
+
+      script(src='javascripts/cart.js')

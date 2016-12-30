@@ -7,6 +7,7 @@ const select_id_cake = 'SELECT * FROM cakes WHERE cake_id IN ';
 
 function formatFillings(fillings) {
   if (fillings == null) { return fillings; }
+  if (typeof fillings == "string") { return '{"' + fillings + '"}'; }
   return '{"' + fillings.join('","') + '"}';
 }
 

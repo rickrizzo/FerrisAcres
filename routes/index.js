@@ -31,6 +31,10 @@ function getOrderCount(req) {
   return numOrders;
 }
 
+function getDateNextWeekAtNoon() {
+  return new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00';
+}
+
 router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Ferris Acres Creamery',
@@ -89,7 +93,7 @@ router.get('/cart', (req, res, next) => {
           icecream: icecreamdata,
           sum: sumPrices(cakedata, icecreamdata),
           orderCount: getOrderCount(req),
-          pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
+          pickup: getDateNextWeekAtNoon()
         });
       })
     });
@@ -98,13 +102,14 @@ router.get('/cart', (req, res, next) => {
       title: 'Ferris Acres Creamery',
       order: [],
       orderCount: getOrderCount(req),
-      pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
+      pickup: getDateNextWeekAtNoon()
     });
   }
 });
 
-router.get('/order', (req, res, next, getOrderCount) => {
-  orderCtrl.getOrderById(req, res, next);
+router.get('/order', (req, res, next) => {
+  console.log("HERE");
+  orderCtrl.getOrderById(req, res, next, getOrderCount);
 });
 
 router.get('/thanks/:orderid', (req, res, next) => {
