@@ -1,3 +1,4 @@
+// Fonts
 $font-stack: 'Open Sans', 'Helvetica','Sans-Serif';
 
 // Dimentions
@@ -5,6 +6,31 @@ $phone: 414px;
 $tablet: 768px;
 $desktop: 992px;
 $ultrawide: 1200px;
+
+.btn {
+  font-size: 20px;
+  float: left;
+  margin: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: maroon;
+  color: white;
+  width: 200px;
+  padding: 1.5em 0;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0px 0px 0px 0px rgba(143,143,143,1);
+  &:hover {
+    background-color: rgb(96, 0, 0);
+    box-shadow: 0px 2px 15px 1px rgba(143,143,143,1);
+  }
+  @media (max-width: $phone) {
+    width: 100%;
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+}
 
 html {
   margin: 0;
@@ -77,6 +103,7 @@ header {
     }
   }
 }
+
 main {
   margin: 0 10%;
   padding-bottom: 1em;
@@ -91,28 +118,27 @@ main {
   }
 }
 
-.btn {
-  font-size: 20px;
-  float: left;
-  margin: 10px;
-  display: inline-block;
-  border-radius: 10px;
-  background-color: maroon;
-  color: white;
-  width: 200px;
-  padding: 1.5em 0;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0px 0px 0px 0px rgba(143,143,143,1);
-  &:hover {
-    background-color: rgb(96, 0, 0);
-    box-shadow: 0px 2px 15px 1px rgba(143,143,143,1);
+table {
+  border-collapse: collapse;
+  width: 100%;
+  td, th {
+    padding: 1em;
+    text-align: left;
+    border: 1px solid #dddddd;
+    @media (max-width: $phone) {
+      padding: 0;
+      padding: 5px;
+    }
   }
-  @media (max-width: $phone) {
-    width: 100%;
-    font-size: 1.5em;
-    margin: 0;
-    margin-bottom: 20px;
+  tbody {
+    tr {
+      &:nth-child(even) {
+        background-color: #FFF;
+      }
+      &:nth-child(odd) {
+        background-color: #CCC;
+      }
+    }
   }
 }
 

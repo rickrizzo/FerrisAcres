@@ -1,3 +1,26 @@
+.btn {
+  font-size: 20px;
+  float: left;
+  margin: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: maroon;
+  color: white;
+  width: 200px;
+  padding: 1.5em 0;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0px 0px 0px 0px #8f8f8f; }
+  .btn:hover {
+    background-color: #600000;
+    box-shadow: 0px 2px 15px 1px #8f8f8f; }
+  @media (max-width: 414px) {
+    .btn {
+      width: 100%;
+      font-size: 1.5em;
+      margin: 0;
+      margin-bottom: 20px; } }
+
 html {
   margin: 0;
   padding: 0; }
@@ -63,28 +86,21 @@ main {
     main {
       margin: 0 1em; } }
 
-.btn {
-  font-size: 20px;
-  float: left;
-  margin: 10px;
-  display: inline-block;
-  border-radius: 10px;
-  background-color: maroon;
-  color: white;
-  width: 200px;
-  padding: 1.5em 0;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0px 0px 0px 0px #8f8f8f; }
-  .btn:hover {
-    background-color: #600000;
-    box-shadow: 0px 2px 15px 1px #8f8f8f; }
-  @media (max-width: 414px) {
-    .btn {
-      width: 100%;
-      font-size: 1.5em;
-      margin: 0;
-      margin-bottom: 20px; } }
+table {
+  border-collapse: collapse;
+  width: 100%; }
+  table td, table th {
+    padding: 1em;
+    text-align: left;
+    border: 1px solid #dddddd; }
+    @media (max-width: 414px) {
+      table td, table th {
+        padding: 0;
+        padding: 5px; } }
+  table tbody tr:nth-child(even) {
+    background-color: #FFF; }
+  table tbody tr:nth-child(odd) {
+    background-color: #CCC; }
 
 footer {
   clear: left;
