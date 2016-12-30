@@ -9,9 +9,6 @@ module.exports = {
     return db.any(insert_ice_cream, [req.body.size, req.body.flavor, req.body.quantity]);
   },
   getIceCreamsById: function(ids) {
-    if(ids.length == 0) {
-      ids.push(1000)
-    }
     return db.any(select_id_ice_cream + '(' + ids.join() + ');');
   }
 }

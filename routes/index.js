@@ -5,6 +5,7 @@ const router = express.Router();
 const cakeCtrl = require('../controllers/cakeCtrl.js');
 const iceCreamCtrl = require('../controllers/iceCreamCtrl.js');
 const orderCtrl = require('../controllers/orderCtrl.js');
+const userCtrl = require('../controllers/userCtrl.js');
 
 function moneyToInt(money) {
   return Number(String(money).replace(/[^0-9\.]+/g,""));
@@ -85,18 +86,58 @@ router.get('/cart', (req, res, next) => {
   if(req.cookies.ferrisacres) {
     var cert = fs.readFileSync('private.key', 'utf-8');
     var token = jwt.verify(req.cookies.ferrisacres, cert);
-    cakeCtrl.getCakesById(token.cake).then( cakedata => {
-      iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
+
+    // Both
+    if(token.cake && token.icecream) {
+      cakeCtrl.getCakesById(token.cake).then( cakedata => {
+        iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
+          res.render('cart', {
+            title: 'Ferris Acres Creamery',
+            cake: cakedata,
+            icecream: icecreamdata,
+            sum: sumPrices(cakedata, icecreamdata),
+            orderCount: getOrderCount(req),
+            pickup: getDateNextWeekAtNoon()
+          });
+        }).catch(error => {
+          console.log(error);
+        });;
+      }).catch(error => {
+        console.log(error);
+      });;
+    }
+
+    // Cake
+    if(token.cake) {
+      cakeCtrl.getCakesById(token.cake).then( cakedata => {
         res.render('cart', {
           title: 'Ferris Acres Creamery',
           cake: cakedata,
-          icecream: icecreamdata,
-          sum: sumPrices(cakedata, icecreamdata),
+          icecream: [],
+          sum: sumPrices(cakedata, []),
           orderCount: getOrderCount(req),
           pickup: getDateNextWeekAtNoon()
         });
-      })
-    });
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+
+    // Ice Cream
+    if(token.icecream) {
+      iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
+        res.render('cart', {
+          title: 'Ferris Acres Creamery',
+          cake: [],
+          icecream: icecreamdata,
+          sum: sumPrices([], icecreamdata),
+          orderCount: getOrderCount(req),
+          pickup: getDateNextWeekAtNoon()
+        });
+      }).catch(error => {
+        console.log(error);
+      });;
+    }
   } else {
     res.render('cart', {
       title: 'Ferris Acres Creamery',
@@ -108,8 +149,54 @@ router.get('/cart', (req, res, next) => {
 });
 
 router.get('/order', (req, res, next) => {
-  console.log("HERE");
-  orderCtrl.getOrderById(req, res, next, getOrderCount);
+  orderCtrl.getOrderById(req, res, next).then(order => {
+    userCtrl.getUserById(order.user_id).then(user => {
+
+      // Both
+      if(order.cake_id && order.ice_cream_id) {
+        cakeCtrl.getCakesById(order.cake_id).then(cakes => {
+          iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(ice_cream => {
+            res.render('order', {
+              title: 'Ferris Acres Creamery',
+              order: order,
+              user: user,
+              cakes: cakes,
+              icecreams: ice_cream,
+              orderCount: getOrderCount(req)
+            });
+          });
+        });
+      }
+
+      // Cakes
+      if(order.cake_id) {
+        cakeCtrl.getCakesById(order.cake_id).then(cakes => {
+          res.render('order', {
+            title: 'Ferris Acres Creamery',
+            order: order,
+            user: user,
+            cakes: cakes,
+            icecreams: [],
+            orderCount: getOrderCount(req)
+          });
+        });
+      }
+
+      // Ice Cream
+      if(order.ice_cream_id) {
+        iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(ice_cream => {
+          res.render('order', {
+            title: 'Ferris Acres Creamery',
+            order: order,
+            user: user,
+            cakes: [],
+            icecreams: ice_cream,
+            orderCount: getOrderCount(req)
+          });
+        });
+      }
+    })
+  });
 });
 
 router.get('/thanks/:orderid', (req, res, next) => {

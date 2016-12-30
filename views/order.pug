@@ -16,7 +16,7 @@ block content
         td #{order.placed.toLocaleString()}
         td #{order.pickup.toLocaleString()}
         td #{item.type} #{item.color_one} & #{item.color_two} Cake
-        td #{item.size}
+        td #{item.size.replace('_', '" ')}
         td 1
     each item in icecreams
       tr

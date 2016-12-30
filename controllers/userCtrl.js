@@ -26,19 +26,6 @@ module.exports = {
       return next(error);
     });
   },
-  getUsers: function(req, res, next) {
-    db.any(select_all_user)
-    .then(data => {
-      res.status(200).json({
-        status: 'success',
-        data: data,
-        message: 'Retrieved all users'
-      });
-    })
-    .catch(error => {
-      return next(error);
-    })
-  },
   getUserById: function(userid) {
     return db.one(select_user_by_id, [userid]);
   }
