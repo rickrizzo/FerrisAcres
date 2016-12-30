@@ -21,18 +21,20 @@ function sumPrices(cake, icecream) {
   return sum;
 }
 
-router.get('/', (req, res, next) => {
+function getOrderCount(req) {
   var numOrders = 0;
-
   if(req.cookies.ferrisacres) {
     var cert = fs.readFileSync('private.key', 'utf-8');
     var token = jwt.verify(req.cookies.ferrisacres, cert);
     numOrders = token.cake.length + token.icecream.length;
   }
+  return numOrders;
+}
 
+router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Ferris Acres Creamery',
-    orderCount: numOrders
+    orderCount: getOrderCount(req)
   });
 });
 
@@ -46,7 +48,8 @@ router.get('/cake', (req, res, next) => {
       sizes: enums.cake_sizes,
       flavors: enums.ice_cream_flavors,
       fillings: enums.fillings,
-      colors: enums.colors
+      colors: enums.colors,
+      orderCount: getOrderCount(req)
     })
   });
 });
@@ -58,7 +61,8 @@ router.get('/icecream', (req, res, next) => {
     res.render('ice_cream_order', {
       title: 'Ferris Acres Creamery',
       sizes: enums.ice_cream_sizes,
-      flavors: enums.ice_cream_flavors
+      flavors: enums.ice_cream_flavors,
+      orderCount: getOrderCount(req)
     });
   });
 });
@@ -67,7 +71,8 @@ router.get('/admin', (req, res, next) => {
   orderCtrl.getOrders(req, res, next).then(data => {
     res.render('admin', {
       title: 'Ferris Acres Creamery',
-      orders: data
+      orders: data,
+      orderCount: getOrderCount(req)
     });
   });
 });
@@ -78,12 +83,12 @@ router.get('/cart', (req, res, next) => {
     var token = jwt.verify(req.cookies.ferrisacres, cert);
     cakeCtrl.getCakesById(token.cake).then( cakedata => {
       iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
-        console.log(cakedata);
         res.render('cart', {
           title: 'Ferris Acres Creamery',
           cake: cakedata,
           icecream: icecreamdata,
           sum: sumPrices(cakedata, icecreamdata),
+          orderCount: getOrderCount(req),
           pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
         });
       })
@@ -92,26 +97,21 @@ router.get('/cart', (req, res, next) => {
     res.render('cart', {
       title: 'Ferris Acres Creamery',
       order: [],
+      orderCount: getOrderCount(req),
       pickup: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00'
     });
   }
 });
 
-router.get('/order', (req, res, next) => {
+router.get('/order', (req, res, next, getOrderCount) => {
   orderCtrl.getOrderById(req, res, next);
 });
 
 router.get('/thanks/:orderid', (req, res, next) => {
   res.render('thanks', {
     title: 'Ferris Acres Creamery',
-    order: req.params.orderid
-  });
-});
-
-router.get('/test', (req, res, next) => {
-  res.render('test', {
-    stylesheet: 'stylesheets/style.css',
-    vueFiles: ['javascripts/manifest.js', 'javascripts/vendor.js', 'javascripts/app.js']
+    order: req.params.orderid,
+    orderCount: getOrderCount(req)
   });
 });
 

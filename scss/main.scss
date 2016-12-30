@@ -1,5 +1,11 @@
 $font-stack: 'Open Sans', 'Helvetica','Sans-Serif';
 
+// Dimentions
+$phone: 414px;
+$tablet: 768px;
+$desktop: 992px;
+$ultrawide: 1200px;
+
 html {
   margin: 0;
   padding: 0;
@@ -7,8 +13,11 @@ html {
 
 body {
   font-family: $font-stack;
-  margin: 0;
+  margin: 1em;
   padding: 0;
+  @media (max-width: $phone) {
+    margin:0;
+  }
 }
 
 header {
@@ -20,12 +29,14 @@ header {
     }
   }
   nav {
+    width: 100%;
     ul {
+      background-color: maroon;
+      border-radius: 10px;
       list-style: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: maroon;
       li {
         float: left;
         a {
@@ -40,15 +51,36 @@ header {
         }
       }
     }
+    @media (max-width: $phone) {
+      ul {
+        border-radius: 0px;
+        li {
+          border-left: 1px solid white;
+          width: 33%;
+          height: 4em;
+          a {
+            padding: 0.5em;
+          }
+          &:first-child {
+            border-left: none;
+            display: none;
+
+          }
+          &:second-child {
+            border-left: none;
+          }
+        }
+      }
+    }
   }
 }
 
 .btn {
   font-size: 20px;
   float: left;
-  margin: 10px 10px;
+  margin: 10px;
   display: inline-block;
-  border-radius: 3px;
+  border-radius: 10px;
   background-color: maroon;
   color: white;
   width: 200px;

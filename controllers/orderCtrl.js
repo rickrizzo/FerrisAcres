@@ -41,7 +41,7 @@ module.exports = {
   getOrders: function(req, res, next) {
     return db.any(get_all_order);
   },
-  getOrderById: function(req, res, next) {
+  getOrderById: function(req, res, next, getOrderCount) {
     db.one(get_order_by_id, [req.query.orderid]).then(order => {
       userCtrl.getUserById(order.user_id).then(user => {
         cakeCtrl.getCakesById(order.cake_id).then(cakes => {
@@ -51,7 +51,8 @@ module.exports = {
               order: order,
               user: user,
               cakes: cakes,
-              icecreams: icecreams
+              icecreams: icecreams,
+              orderCount: getOrderCount(req)
             });
           });
         });

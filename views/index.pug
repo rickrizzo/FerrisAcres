@@ -4,13 +4,9 @@ block content
   section
     a(href="/cake", class="btn") Order Cake
     a(href="/icecream", class="btn") Order Ice Cream
-    if orderCount == 0
-      form(action='/order' method='GET')
-        p
-          label(for="lookup") Lookup Order:
-          input(type="text", name="orderid")
-          input(type="submit" value="Lookup")
-    if orderCount == 1
-      h3 You have #{orderCount} item in your cart
-    if orderCount >= 2
-      h3 You have #{orderCount} items in your cart
+  section
+    form(action='/order' method='GET')
+      p
+        label(for="lookup") Lookup Order:
+        input(type="text", name="orderid")
+        input(type="submit" value="Lookup")
