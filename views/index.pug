@@ -6,7 +6,6 @@ block content
     a(href="/icecream", class="btn") Order Ice Cream
   section
     form(action='/order' method='GET')
-      p
-        label(for="lookup") Lookup Order:
-        input(type="text", name="orderid")
-        input(type="submit" value="Lookup")
+      article
+        input(type="text" name="orderid" placeholder="Order #")
+        input(type="submit" value="Lookup Order")
