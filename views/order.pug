@@ -1,31 +1,27 @@
 extends layout
 block content
   h2 Order Lookup
+  h4 Placed: #{order.placed.toLocaleString()}
+  h4 Pickup Date: #{order.pickup.toLocaleString()}
   table
     tr
-      th Name
-      th Order Date
-      th Pickup Date
-      th Order
+      th Item
       th Size
       th Quantity
+      th Price
 
     each item in cakes
       tr
-        td #{user.name}
-        td #{order.placed.toLocaleString()}
-        td #{order.pickup.toLocaleString()}
         td #{item.type} #{item.color_one} & #{item.color_two} Cake
         td #{item.size.replace('_', '" ')}
         td 1
+        td #{item.price}
     each item in icecreams
       tr
-        td #{user.name}
-        td #{order.placed.toLocaleString()}
-        td #{order.pickup.toLocaleString()}
         td #{item.flavor} Ice
         td #{item.size}
         td #{item.quantity}
+        td #{item.price}
 
   script(src="https://code.jquery.com/jquery-3.1.1.min.js")
   script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js')

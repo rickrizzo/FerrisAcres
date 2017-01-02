@@ -99,16 +99,12 @@ router.get('/cart', (req, res, next) => {
             orderCount: getOrderCount(req),
             pickup: getDateNextWeekAtNoon()
           });
-        }).catch(error => {
-          console.log(error);
-        });;
-      }).catch(error => {
-        console.log(error);
-      });;
+        });
+      });
     }
 
     // Cake
-    if(token.cake) {
+    else if(token.cake) {
       cakeCtrl.getCakesById(token.cake).then( cakedata => {
         res.render('cart', {
           title: 'Ferris Acres Creamery',
@@ -118,13 +114,11 @@ router.get('/cart', (req, res, next) => {
           orderCount: getOrderCount(req),
           pickup: getDateNextWeekAtNoon()
         });
-      }).catch(error => {
-        console.log(error);
       });
     }
 
     // Ice Cream
-    if(token.icecream) {
+    else if(token.icecream) {
       iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
         res.render('cart', {
           title: 'Ferris Acres Creamery',
@@ -134,10 +128,9 @@ router.get('/cart', (req, res, next) => {
           orderCount: getOrderCount(req),
           pickup: getDateNextWeekAtNoon()
         });
-      }).catch(error => {
-        console.log(error);
-      });;
+      });
     }
+
   } else {
     res.render('cart', {
       title: 'Ferris Acres Creamery',
@@ -169,7 +162,7 @@ router.get('/order', (req, res, next) => {
       }
 
       // Cakes
-      if(order.cake_id) {
+      else if(order.cake_id) {
         cakeCtrl.getCakesById(order.cake_id).then(cakes => {
           res.render('order', {
             title: 'Ferris Acres Creamery',
@@ -183,7 +176,7 @@ router.get('/order', (req, res, next) => {
       }
 
       // Ice Cream
-      if(order.ice_cream_id) {
+      else if(order.ice_cream_id) {
         iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(ice_cream => {
           res.render('order', {
             title: 'Ferris Acres Creamery',

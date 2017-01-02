@@ -14,19 +14,19 @@ module.exports = {
   createCake: function(req, res, next) {
     return db.getConnection().any(insert_cake, [req.body.type, req.body.size, formatFillings(req.body.fillings), req.body.art_description, req.body.flavor_one, req.body.flavor_two, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color]);
   },
-  getCakes: function(req, res, next) {
-    db.getConnection().any(select_all_cake)
-    .then(data => {
-      res.status(200).json({
-        status: 'success',
-        data: data,
-        message: 'Retrieved all cakes'
-      });
-    })
-    .catch(error => {
-      return next(error);
-    })
-  },
+  // getCakes: function(req, res, next) {
+  //   db.getConnection().any(select_all_cake)
+  //   .then(data => {
+  //     res.status(200).json({
+  //       status: 'success',
+  //       data: data,
+  //       message: 'Retrieved all cakes'
+  //     });
+  //   })
+  //   .catch(error => {
+  //     return next(error);
+  //   })
+  // },
   getCakesById: function(ids) {
     return db.getConnection().any(select_id_cake + '(' + ids.join() + ');');
   }
