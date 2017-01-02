@@ -1,10 +1,9 @@
-const pgp = require('pg-promise')();
-const db = pgp(process.env.DATABASE_URL || 'postgres://localhost:5432/ferris_acres');
+const db = require('../controllers/db.js');
 const fs = require('fs');
 
 module.exports = {
   getAllEnums: function() {
-    db.task(function * (t) {
+    db.getConnection().task(function * (t) {
       // Variables
       var dbEnums = {
         cake_types:[],
