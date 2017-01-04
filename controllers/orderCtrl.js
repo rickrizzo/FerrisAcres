@@ -1,7 +1,6 @@
-const pgp = require('pg-promise')();
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const db = pgp(process.env.DATABASE_URL || 'postgres://localhost:5432/ferris_acres');
+const db = require('../controllers/db.js');
 
 const userCtrl = require('../controllers/userCtrl.js');
 const cakeCtrl = require('../controllers/cakeCtrl.js');
@@ -23,7 +22,7 @@ function parsePhoneNumber(phone_number) {
 
 module.exports = {
   createOrder: function(req, res, next) {
-    db.task(function * (t) {
+    db.getConnection().task(function * (t) {
       var cert = fs.readFileSync('private.key', 'utf-8');
       var token = jwt.verify(req.cookies.ferrisacres, cert);
       if(token.cake.length == 0){ token.cake = null;}
@@ -39,23 +38,9 @@ module.exports = {
     });
   },
   getOrders: function(req, res, next) {
-    return db.any(get_all_order);
+    return db.getConnection().any(get_all_order);
   },
   getOrderById: function(req, res, next) {
-    db.one(get_order_by_id, [req.query.orderid]).then(order => {
-      userCtrl.getUserById(order.user_id).then(user => {
-        cakeCtrl.getCakesById(order.cake_id).then(cakes => {
-          iceCreamCtrl.getIceCreamsById(order.ice_cream_id).then(icecreams => {
-            res.render('order', {
-              title: 'Ferris Acres Creamery',
-              order: order,
-              user: user,
-              cakes: cakes,
-              icecreams: icecreams
-            });
-          });
-        });
-      });
-    });
+    return db.getConnection().one(get_order_by_id, [req.query.orderid]);
   }
 }

@@ -61,60 +61,6 @@ CREATE TYPE FLAVOR AS ENUM(
   'Vanilla'
 );
 
--- SEQUENCES
-create sequence random_int_seq;
-
--- PROCEDURES
-CREATE OR REPLACE FUNCTION calculate_price_cakes()
-RETURNS trigger AS $price_added_cakes$
-  BEGIN
-    NEW.price = (SELECT price FROM cake_size_prices AS c WHERE c.type = NEW.type AND c.size = NEW.size);
-    -- Fillings
-    IF NEW.fillings IS NOT NULL THEN
-      NEW.price = NEW.price + (SELECT SUM(p.price) FROM filling_prices AS p WHERE p.filling = ANY(NEW.fillings));
-    END IF;
-    -- Art
-    IF NEW.art_description IS NOT NULL THEN
-      NEW.price = NEW.price + MONEY(5);
-    END IF;
-    RETURN NEW;
-  END;
-$price_added_cakes$  LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION calculate_price_ice_cream()
-RETURNS trigger AS $price_added_ice_cream$
-  BEGIN
-    NEW.price = (SELECT price FROM ice_cream_size_prices AS c WHERE c.size = NEW.size) * NEW.quantity;
-    RETURN NEW;
-  END;
-$price_added_ice_cream$  LANGUAGE plpgsql;
-
--- Feistel Cipher taken from http://wiki.postgresql.org/wiki/Pseudo_encrypt
-CREATE OR REPLACE FUNCTION pseudo_encrypt(VALUE int) returns bigint AS $$
-DECLARE
-l1 int;
-l2 int;
-r1 int;
-r2 int;
-i int:=0;
-BEGIN
- l1:= (VALUE >> 16) & 65535;
- r1:= VALUE & 65535;
- WHILE i < 3 LOOP
-   l2 := r1;
-   r2 := l1 # ((((1366.0 * r1 + 150889) % 714025) / 714025.0) * 32767)::int;
-   l1 := l2;
-   r1 := r2;
-   i := i + 1;
- END LOOP;
- RETURN ((l1::bigint << 16) + r1);
-END;
-$$ LANGUAGE plpgsql strict immutable;
-
-CREATE OR REPLACE FUNCTION make_random_id() returns bigint as $$
-  select pseudo_encrypt(nextval('random_int_seq')::int)
-$$ language sql;
-
 -- Tables
 CREATE TABLE IF NOT EXISTS users(
   user_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
@@ -192,9 +138,66 @@ CREATE TABLE IF NOT EXISTS filling_prices(
 \COPY ice_cream_size_prices FROM 'pricing/icecreamprices.csv' CSV;
 \COPY filling_prices FROM 'pricing/fillingprices.csv' CSV;
 
+-- SEQUENCES
+create sequence random_int_seq;
+
+-- PROCEDURES
+CREATE OR REPLACE FUNCTION calculate_price_cakes()
+RETURNS trigger AS $price_added_cakes$
+  BEGIN
+    NEW.price = (SELECT price FROM cake_size_prices AS c WHERE c.type = NEW.type AND c.size = NEW.size);
+    -- Fillings
+    IF NEW.fillings IS NOT NULL THEN
+      NEW.price = NEW.price + (SELECT SUM(p.price) FROM filling_prices AS p WHERE p.filling = ANY(NEW.fillings));
+    END IF;
+    -- Art
+    IF NEW.art_description IS NOT NULL THEN
+      IF NEW.art_description <> '' THEN
+        NEW.price = NEW.price + MONEY(5);
+      END IF;
+    END IF;
+  RETURN NEW;
+  END;
+$price_added_cakes$  LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION calculate_price_ice_cream()
+RETURNS trigger AS $price_added_ice_cream$
+  BEGIN
+    NEW.price = (SELECT price FROM ice_cream_size_prices AS c WHERE c.size = NEW.size) * NEW.quantity;
+    RETURN NEW;
+  END;
+$price_added_ice_cream$  LANGUAGE plpgsql;
+
+-- Feistel Cipher taken from http://wiki.postgresql.org/wiki/Pseudo_encrypt
+CREATE OR REPLACE FUNCTION pseudo_encrypt(VALUE int) returns bigint AS $$
+DECLARE
+l1 int;
+l2 int;
+r1 int;
+r2 int;
+i int:=0;
+BEGIN
+  l1:= (VALUE >> 16) & 65535;
+  r1:= VALUE & 65535;
+  WHILE i < 3 LOOP
+    l2 := r1;
+    r2 := l1 # ((((1366.0 * r1 + 150889) % 714025) / 714025.0) * 32767)::int;
+    l1 := l2;
+    r1 := r2;
+    i := i + 1;
+  END LOOP;
+  RETURN ((l1::bigint << 16) + r1);
+END;
+$$ LANGUAGE plpgsql strict immutable;
+
+CREATE OR REPLACE FUNCTION make_random_id() returns bigint as $$
+  select pseudo_encrypt(nextval('random_int_seq')::int)
+$$ language sql;
+
+
 -- TRIGGERS
 CREATE TRIGGER price_added_cakes
-  BEFORE INSERT ON cakes
+  BEFORE INSERT OR UPDATE ON cakes
   FOR EACH ROW EXECUTE PROCEDURE calculate_price_cakes();
 
 CREATE TRIGGER price_added_ice_cream

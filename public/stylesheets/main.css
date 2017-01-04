@@ -1,0 +1,119 @@
+.btn {
+  font-size: 20px;
+  float: left;
+  margin: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: maroon;
+  color: white;
+  width: 200px;
+  padding: 1.5em 0;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0px 0px 0px 0px #8f8f8f; }
+  .btn:hover {
+    background-color: #600000;
+    box-shadow: 0px 2px 15px 1px #8f8f8f; }
+  @media (max-width: 414px) {
+    .btn {
+      width: 100%;
+      font-size: 1.5em;
+      margin: 0;
+      margin-bottom: 20px; } }
+
+html {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "Open Sans", "Helvetica", "Sans-Serif";
+  margin: 1em;
+  padding: 0; }
+  @media (max-width: 414px) {
+    body {
+      margin: 0; } }
+
+header a {
+  text-decoration: none; }
+  header a h1 {
+    text-align: center;
+    color: black; }
+
+header nav {
+  width: 100%; }
+  header nav ul {
+    background-color: maroon;
+    border-radius: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+    header nav ul li {
+      float: left; }
+      header nav ul li a {
+        color: white;
+        display: block;
+        padding: 1em;
+        text-align: center; }
+        header nav ul li a:hover {
+          background-color: #600000; }
+  @media (max-width: 414px) {
+    header nav ul {
+      border-radius: 0; }
+      header nav ul li {
+        border-right: 1px solid white;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 33%;
+        height: 4em; }
+        header nav ul li a {
+          padding: 0.5em; }
+        header nav ul li:first-child {
+          display: none; }
+        header nav ul li:last-child {
+          border-right: none; } }
+
+main {
+  margin: 0 10%;
+  padding-bottom: 1em; }
+  main img {
+    height: 300px;
+    border-radius: 10px; }
+    @media (max-width: 414px) {
+      main img {
+        height: 150px; } }
+  main section {
+    margin: 0 auto; }
+    main section article {
+      text-align: center; }
+  @media (max-width: 414px) {
+    main {
+      margin: 0 1em; } }
+  main input[type='radio'] {
+    display: none; }
+
+table {
+  border-collapse: collapse;
+  width: 100%; }
+  table td, table th {
+    padding: 1em;
+    text-align: left;
+    border: 1px solid #dddddd; }
+    @media (max-width: 414px) {
+      table td, table th {
+        padding: 0;
+        padding: 5px; } }
+  table tbody tr:nth-child(even) {
+    background-color: #FFF; }
+  table tbody tr:nth-child(odd) {
+    background-color: #CCC; }
+
+footer {
+  clear: left;
+  padding: 1em;
+  text-align: center; }
+  footer a {
+    color: black;
+    margin: 0 1em;
+    text-decoration: none; }
