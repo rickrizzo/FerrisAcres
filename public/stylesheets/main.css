@@ -59,9 +59,9 @@ header nav {
           background-color: #600000; }
   @media (max-width: 414px) {
     header nav ul {
-      border-radius: 0px; }
+      border-radius: 0; }
       header nav ul li {
-        border-left: 1px solid white;
+        border-right: 1px solid white;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -70,14 +70,19 @@ header nav {
         header nav ul li a {
           padding: 0.5em; }
         header nav ul li:first-child {
-          border-left: none;
           display: none; }
-        header nav ul li:second-child {
-          border-left: none; } }
+        header nav ul li:last-child {
+          border-right: none; } }
 
 main {
   margin: 0 10%;
   padding-bottom: 1em; }
+  main img {
+    height: 300px;
+    border-radius: 10px; }
+    @media (max-width: 414px) {
+      main img {
+        height: 150px; } }
   main section {
     margin: 0 auto; }
     main section article {
@@ -85,6 +90,8 @@ main {
   @media (max-width: 414px) {
     main {
       margin: 0 1em; } }
+  main input[type='radio'] {
+    display: none; }
 
 table {
   border-collapse: collapse;

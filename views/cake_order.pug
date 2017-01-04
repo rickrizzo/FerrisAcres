@@ -2,55 +2,60 @@ extends layout
 
 block content
   h2 Cake Order Form
-  form(method="post", action="/api/cakes")
+  form(method='post', action='/api/cakes')
     fieldset
       legend Cake Information
       p
-        label(for="type") Type:
-        select(name="type")
+        label(for='number') Cake Style:
+          img(src='images/cake_1.jpg')
+        input(type='radio' id='number' name='number' value='1')
+
+      p
+        label(for='type') Type:
+        select(name='type')
           each type in types
             option(value= type.name) #{type.name}
       p
-        label(for="size") Size:
-        select(name="size")
+        label(for='size') Size:
+        select(name='size')
           each sizedata, size in sizes
             option(value= size) #{sizedata.display_name}
 
       p
-        label(for="flavors") Flavors
+        label(for='flavors') Flavors
         p
-          select(name="flavor_one")
+          select(name='flavor_one')
             each flavor in flavors
               option(value= flavor.name) #{flavor.name}
         p
-          select(name="flavor_two")
+          select(name='flavor_two')
             each flavor in flavors
               option(value= flavor.name) #{flavor.name}
       p
-        label(for="fillings") Fillings:
+        label(for='fillings') Fillings:
         each filling in fillings
           br
-          input(type="checkbox", name="fillings", value= filling.name)
+          input(type='checkbox', name='fillings', value= filling.name)
           | #{filling.name}
       p
-        label(for="art_description") Art:
+        label(for='art_description') Art:
       p
-        textarea(name="art_description" rows="6" cols="40" placeholder="Dream up the best cake you can")
+        textarea(name='art_description' rows='6' cols='40' placeholder='Dream up the best cake you can')
       p
-        label(for="colors") Colors:
-        select(name="color_one")
+        label(for='colors') Colors:
+        select(name='color_one')
           each color in colors
             option(value= color.name) #{color.name}
-        select(name="color_two")
+        select(name='color_two')
           each color in colors
             option(value= color.name) #{color.name}
       p
-        label(for="writing") Writing:
-        input(type="", name="writing")
+        label(for='writing') Writing:
+        input(type='', name='writing')
       p
-        label(for="writing_color") Writing Color:
-        select(name="writing_color")
+        label(for='writing_color') Writing Color:
+        select(name='writing_color')
           each color in colors
             option(value= color.name) #{color.name}
     p
-      input(class="btn" type="submit" value="Add to cart")
+      input(class='btn' type='submit' value='Add to cart')

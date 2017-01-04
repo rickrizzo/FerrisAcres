@@ -45,8 +45,6 @@ router.post('/cakes', (req, res, next) => {
   cakeCtrl.createCake(req, res, next).then(data => {
     var token = addToToken(data, req);
     res.cookie('ferrisacres', token).redirect("/");
-  }).catch(error => {
-    return next(error);
   });
 });
 

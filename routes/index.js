@@ -88,7 +88,7 @@ router.get('/cart', (req, res, next) => {
     var token = jwt.verify(req.cookies.ferrisacres, cert);
 
     // Both
-    if(token.cake && token.icecream) {
+    if(token.cake.length > 0 && token.icecream.length > 0) {
       cakeCtrl.getCakesById(token.cake).then( cakedata => {
         iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
           res.render('cart', {
@@ -104,7 +104,7 @@ router.get('/cart', (req, res, next) => {
     }
 
     // Cake
-    else if(token.cake) {
+    else if(token.cake.length > 0) {
       cakeCtrl.getCakesById(token.cake).then( cakedata => {
         res.render('cart', {
           title: 'Ferris Acres Creamery',
@@ -118,7 +118,7 @@ router.get('/cart', (req, res, next) => {
     }
 
     // Ice Cream
-    else if(token.icecream) {
+    else if(token.icecream.length > 0) {
       iceCreamCtrl.getIceCreamsById(token.icecream).then( icecreamdata => {
         res.render('cart', {
           title: 'Ferris Acres Creamery',

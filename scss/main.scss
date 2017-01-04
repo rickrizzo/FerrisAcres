@@ -79,9 +79,9 @@ header {
     }
     @media (max-width: $phone) {
       ul {
-        border-radius: 0px;
+        border-radius: 0;
         li {
-          border-left: 1px solid white;
+          border-right: 1px solid white;
           display: flex;
           justify-content: center;
           flex-direction: column;
@@ -91,12 +91,10 @@ header {
             padding: 0.5em;
           }
           &:first-child {
-            border-left: none;
             display: none;
-
           }
-          &:second-child {
-            border-left: none;
+          &:last-child {
+            border-right: none;
           }
         }
       }
@@ -107,6 +105,13 @@ header {
 main {
   margin: 0 10%;
   padding-bottom: 1em;
+  img {
+    height: 300px;
+    border-radius: 10px;
+    @media (max-width: $phone) {
+      height: 150px;
+    }
+  }
   section {
     margin: 0 auto;
     article {
@@ -116,6 +121,9 @@ main {
   @media (max-width: $phone) {
     margin: 0 1em;;
   }
+  input[type='radio'] {
+    display: none;
+  };
 }
 
 table {
