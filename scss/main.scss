@@ -123,6 +123,9 @@ main {
   }
   input[type='radio'] {
     display: none;
+    &:checked + img {
+      border: 10px solid red;
+    }
   };
 }
 

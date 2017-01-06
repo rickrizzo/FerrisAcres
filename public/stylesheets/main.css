@@ -92,6 +92,8 @@ main {
       margin: 0 1em; } }
   main input[type='radio'] {
     display: none; }
+    main input[type='radio']:checked + img {
+      border: 10px solid red; }
 
 table {
   border-collapse: collapse;

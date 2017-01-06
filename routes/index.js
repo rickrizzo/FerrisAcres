@@ -45,17 +45,21 @@ router.get('/', (req, res, next) => {
 
 router.get('/cake', (req, res, next) => {
   fs.readFile('enum/enums.json', function(err, enums) {
-    if (err) throw err;
-    enums = JSON.parse(enums);
-    res.render('cake_order', {
-      title: 'Ferris Acres Creamery',
-      types: enums.cake_types,
-      sizes: enums.cake_sizes,
-      flavors: enums.ice_cream_flavors,
-      fillings: enums.fillings,
-      colors: enums.colors,
-      orderCount: getOrderCount(req)
-    })
+    fs.readdir('public/images', (err, pictures) => {
+      if (err) throw err;
+      enums = JSON.parse(enums);
+      res.render('cake_order', {
+        title: 'Ferris Acres Creamery',
+        types: enums.cake_types,
+        sizes: enums.cake_sizes,
+        flavors: enums.ice_cream_flavors,
+        fillings: enums.fillings,
+        colors: enums.colors,
+        pictures: pictures,
+        regex: /\d+/,
+        orderCount: getOrderCount(req)
+      });
+    });
   });
 });
 
