@@ -1,13 +1,14 @@
 extends layout
 block content
   h2 Order Lookup
-  h4 Placed: #{order.placed.toLocaleString()}
+  h4 Placed on #{order.placed.toLocaleString()} by #{user.name}
   h4 Pickup Date: #{order.pickup.toLocaleString()}
   table
     tr
       th Item
       th Size
       th Quantity
+      th Style
       th Price
 
     each item in cakes
@@ -15,10 +16,16 @@ block content
         td #{item.type} #{item.color_one} & #{item.color_two} Cake
         td #{item.size.replace('_', '" ')}
         td 1
+        td #{item.cake_number}
         td #{item.price}
     each item in icecreams
       tr
         td #{item.flavor} Ice Cream
         td #{item.size}
         td #{item.quantity}
+        td Not Applicable
         td #{item.price}
+
+  h4 Contact #{user.name}
+  p Email: #{user.email}
+  p Phone Number: #{user.phone}

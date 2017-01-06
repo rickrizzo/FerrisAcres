@@ -12,7 +12,7 @@ function formatFillings(fillings) {
 
 module.exports = {
   createCake: function(req, res, next) {
-    return db.getConnection().any(insert_cake, [req.body.type, req.body.number, req.body.size, formatFillings(req.body.fillings), req.body.art_description, req.body.flavor_one, req.body.flavor_two, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color]);
+    return db.getConnection().any(insert_cake, [req.body.type, req.body.cake_number, req.body.size, formatFillings(req.body.fillings), req.body.art_description, req.body.flavor_one, req.body.flavor_two, req.body.color_one, req.body.color_two, req.body.writing, req.body.writing_color]);
   },
   getCakesById: function(ids) {
     return db.getConnection().any(select_id_cake + '(' + ids.join() + ');');

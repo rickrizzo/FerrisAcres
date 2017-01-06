@@ -6,9 +6,10 @@ block content
     fieldset
       legend Cake Information
       p
-        label(for='number') Cake Style:
-          img(src='images/cake_1.jpg')
-        input(type='radio' id='number' name='number' value='1')
+        each picture, index in pictures
+          label(for='number' + index)
+            input(type='radio' id='number' + index name='cake_number' value= index + 1)
+            img(src= 'images/' + picture)
 
       p
         label(for='type') Type:
