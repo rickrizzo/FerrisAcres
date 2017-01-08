@@ -3,60 +3,59 @@ extends layout
 block content
   h2 Cake Order Form
   form(method='post', action='/api/cakes')
-    fieldset
-      legend Cake Information
-      p
-        each picture, index in pictures
-          label(for='number' + index)
-            input(type='radio' id='number' + index name='cake_number' value= index + 1)
-            img(src= 'images/' + picture)
-
-      p
-        label(for='type') Type:
-        select(name='type')
-          each type in types
-            option(value= type.name) #{type.name}
-      p
-        label(for='size') Size:
-        select(name='size')
-          each sizedata, size in sizes
-            option(value= size) #{sizedata.display_name}
-
-      p
-        label(for='flavors') Flavors
-        p
-          select(name='flavor_one')
-            each flavor in flavors
-              option(value= flavor.name) #{flavor.name}
-        p
-          select(name='flavor_two')
-            each flavor in flavors
-              option(value= flavor.name) #{flavor.name}
-      p
-        label(for='fillings') Fillings:
-        each filling in fillings
-          br
-          input(type='checkbox', name='fillings', value= filling.name)
-          | #{filling.name}
-      p
-        label(for='art_description') Art:
-      p
-        textarea(name='art_description' rows='6' cols='40' placeholder='Dream up the best cake you can')
-      p
-        label(for='colors') Colors:
-        select(name='color_one')
-          each color in colors
-            option(value= color.name) #{color.name}
-        select(name='color_two')
-          each color in colors
-            option(value= color.name) #{color.name}
-      p
-        label(for='writing') Writing:
-        input(type='', name='writing')
-      p
-        label(for='writing_color') Writing Color:
-        select(name='writing_color')
-          each color in colors
-            option(value= color.name) #{color.name}
+    p Cake Style
     p
-      input(class='btn' type='submit' value='Add to cart')
+      each picture, index in pictures
+        label(for='number' + index)
+          input(type='radio' id='number' + index name='cake_number' value= index + 1)
+          img(src= 'images/' + picture)
+
+    p
+      label(for='type') Type:
+      select(name='type')
+        each type in types
+          option(value= type.name) #{type.name}
+    p
+      label(for='size') Size:
+      select(name='size')
+        each sizedata, size in sizes
+          option(value= size) #{sizedata.display_name}
+
+    p
+      label(for='flavors') Flavors
+      p
+        select(name='flavor_one')
+          each flavor in flavors
+            option(value= flavor.name) #{flavor.name}
+      p
+        select(name='flavor_two')
+          each flavor in flavors
+            option(value= flavor.name) #{flavor.name}
+    p
+      label(for='fillings') Fillings:
+      each filling in fillings
+        br
+        input(type='checkbox', name='fillings', value= filling.name)
+        | #{filling.name}
+    p
+      label(for='art_description') Art:
+    p
+      textarea(name='art_description' rows='6' cols='40' placeholder='Dream up the best cake you can')
+    p
+      label(for='colors') Colors:
+      select(name='color_one')
+        each color in colors
+          option(value= color.name) #{color.name}
+      select(name='color_two')
+        each color in colors
+          option(value= color.name) #{color.name}
+    p
+      label(for='writing') Writing:
+      input(type='', name='writing')
+    p
+      label(for='writing_color') Writing Color:
+      select(name='writing_color')
+        each color in colors
+          option(value= color.name) #{color.name}
+  p
+    input(class='btn' type='submit' value='Add to cart')
