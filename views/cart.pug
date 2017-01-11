@@ -5,7 +5,7 @@ block content
     if !cake && !icecream || cake.length == 0 && icecream.length == 0
       h3 Cart is empty.
     if cake || icecream
-      table.shopping-cart
+      table(class='table table-striped table-responsive')
         thead
           tr
             th Item
@@ -24,7 +24,7 @@ block content
           each item in icecream
             tr
               td #{item.flavor} Ice Cream
-              td
+              td None
               td #{item.size}
               td #{item.quantity}
               td #{item.price}
@@ -40,26 +40,29 @@ block content
             if cake.length + icecream.length > 1
               td $#{sum.toFixed(2)}
 
+      a(id='clearcart' href='/' class='btn btn-default' role='button') Clear Cart
+
       fieldset
         legend Order Information
-        p
-          label(for="name") Name:
-          input(type="text", name="name")
-        p
-          label(for="email") Email:
-          input(type="email", name="email")
-        p
-          label(for="phone") Phone:
-          input(type="tel", name="phone")
-        p
-          label(for="pickup") Pickup Time:
-          input(type="datetime-local", name="pickup", min= pickup, value= pickup)
-        p
-          label(for="instructions") Instructions:
-        p
-          textarea(name="instructions" rows="6" cols="40" placeholder="Anything else we should know")
+        div(class='row')
+          div(class='form-group')
+            div(class='col-md-6')
+              label(for="name") Name:
+              input(type="text" name="name" class='form-control')
 
-      input(type="submit" class="btn" value="Checkout")
-      a(id='clearcart' href='' class='btn') Clear Cart
+              label(for="email") Email:
+              input(type="email", name="email" class='form-control')
+
+              label(for="phone") Phone:
+              input(type="tel", name="phone" class='form-control')
+
+            div(class='col-md-6')
+              label(for="pickup") Pickup Time:
+              input(type="datetime-local" name="pickup" min= pickup, value= pickup class='form-control')
+
+              label(for="instructions") Instructions:
+              textarea(name="instructions" rows="5" placeholder="Anything else we should know?" class='form-control')
+
+      button(type="submit" class="btn btn-primary" ) Checkout
 
       script(src='javascripts/cart.js')

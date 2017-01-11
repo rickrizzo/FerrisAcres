@@ -14,12 +14,12 @@ block content
     div(class='form-group')
       div(class='row')
         div(class='col-md-3 col-sm-6')
-          label(for='type') Type:
+          label(for='type') Type
           select(name='type' class='form-control input-medium')
             each type in types
               option(value= type.name) #{type.name}
         div(class='col-md-3 col-sm-6')
-          label(for='size') Size:
+          label(for='size') Size
           select(name='size' class='form-control')
             each sizedata, size in sizes
               option(value= size) #{sizedata.display_name}
@@ -39,19 +39,19 @@ block content
     div(class='form-group')
       div(class='row')
         div(class='col-sm-6')
-          label(for='fillings') Fillings:
+          label(for='fillings') Fillings
           div(class='container')
             each filling in fillings
               div(class='checkbox')
                 input(type='checkbox' name='fillings' value= filling.name)
                 | #{filling.name}
         div(class='col-md-3 col-sm-6')
-          label(for='color_one') Primary Color:
+          label(for='color_one') Primary Color
           select(name='color_one' class='form-control')
             each color in colors
               option(value= color.name) #{color.name}
         div(class='col-md-3 col-sm-6')
-          label(for='color_two') Secondary Color:
+          label(for='color_two') Secondary Color
           select(name='color_two' class='form-control')
             each color in colors
               option(value= color.name) #{color.name}
@@ -59,15 +59,15 @@ block content
     div(class='form-group')
       div(class='row')
         div(class='col-sm-6')
-          label(for='art_description') Art:
-          textarea(name='art_description' class='form-control' rows='6' cols='40' placeholder='Dream up the best cake you can')
+          label(for='art_description') Art
+          textarea(name='art_description' class='form-control' rows='6' placeholder='Dream up the best cake you can')
         div(class='col-sm-6')
           label(for='writing') Writing:
           input(type='text' name='writing' placeholder='Happy birthday!' class='form-control')
         div(class='col-sm-6')
-          label(for='writing_color') Writing Color:
+          label(for='writing_color') Writing Color
           select(name='writing_color' class='form-control')
             each color in colors
               option(value= color.name) #{color.name}
 
-    button(class='btn btn-primary btn-lg' type='submit') Add to Cart
+    button(class='btn btn-primary' type='submit') Add to Cart

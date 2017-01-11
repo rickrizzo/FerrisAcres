@@ -3,22 +3,23 @@ extends layout
 block content
   h2 Ice Cream Ordering Form
   form(method="post", action="/api/icecreams")
-    fieldset
-      legend Ice Cream Information
-      p
-        label(for='size') Size:
-        select(name='size')
-          each size in sizes
-            option(value= size.name) #{size.name}
-      p
-        label(for='flavor') Available Flavors
-        select(name='flavor')
-          each flavor in flavors
-            option(value= flavor.name) #{flavor.name}
-      p
-        label(for='quantity') Quantity
-          input(type='number', name='quantity', value='1')
-      p
-        a(class='btn' href='') Add another Flavor
-      p
-        input(class='btn' type='submit' value="Add to cart")
+    div(class='form-group')
+      div(class='row')
+        div(class='col-md-4')
+          label(for='size') Size
+          select(name='size' class='form-control')
+            each size in sizes
+              option(value= size.name) #{size.name}
+
+        div(class='col-md-4')
+          label(for='flavor') Flavor
+          select(name='flavor' class='form-control')
+            each flavor in flavors
+              option(value= flavor.name) #{flavor.name}
+
+        div(class='col-md-4')
+          label(for='quantity') Quantity
+          input(type='number' name='quantity' value='1' class='form-control')
+    div(class='form-group')
+      button(class='btn btn-default') Add another Flavor
+    button(class='btn btn-primary' type='submit') Add to cart
