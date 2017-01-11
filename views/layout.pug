@@ -9,6 +9,7 @@ html
     link(href='/stylesheets/main.css' rel='stylesheet')
 
   body
+    
     nav
       ul
         li
@@ -19,13 +20,16 @@ html
           a(href='/icecream') Order Ice Cream
         li
           a(href='/cart') Cart (#{orderCount})
+
       header(class='container')
         a(href="/")
           h1(class='page-header')= title
+
     main(class='container')
       block content
 
-    footer(class='container')
-      a(href="") Log In
-      a(href="mailto:russor3@rpi.edu?subject=Website Help") Contact
-      a(href="/admin") Admin
+    footer(class='footer')
+      div(class='container')
+        a(href="") Log In
+        a(href="mailto:russor3@rpi.edu?subject=Website Help") Contact
+        a(href="/admin") Admin

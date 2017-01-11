@@ -5817,6 +5817,10 @@ button.close {
 .page-header {
   text-align: center; }
 
+.center {
+  margin: 0 auto;
+  width: 80%; }
+
 nav {
   width: 100%; }
   nav ul {
