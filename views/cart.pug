@@ -12,7 +12,7 @@ block content
             th Fillings
             th Size
             th Qty
-            th Unit Price
+            th Price
         tbody
           each item in cake
             tr
@@ -32,7 +32,7 @@ block content
             td Total
             td
             td
-            td #{cake.length + icecream.length}
+            td
             if cake.length == 1 && icecream.length == 0
               td #{cake[0].price}
             if cake.length == 0 && icecream.length == 1

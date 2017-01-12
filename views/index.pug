@@ -2,13 +2,13 @@ extends layout
 
 block content
 
-  section
-    a(href="/cake", class='btn btn-primary btn-lg col-xs-12 col-sm-4 col-sm-offset-1' role='button') Order Cake
-    a(href="/icecream", class='btn btn-primary btn-lg col-xs-12 col-sm-4 col-sm-offset-2' role='button') Order Ice Cream
-
-  section(class='form-inline')
-    form(action='/order' method='GET' class='col-sm-6 col-sm-offset-3')
-      div(class='form-group')
-        label(for='orderid') Order Number
-        input(type="text" name="orderid" placeholder="123456789" class='form-control')
-      button(type="submit" class='btn btn-primary form-control') Lookup Order
+  div(class='row')
+    a(href="/cake" class='btn btn-primary btn-lg col-xs-12 col-sm-3 col-sm-offset-3' role='button') Order Cake
+    a(href="/icecream" class='btn btn-primary btn-lg col-xs-12 col-sm-3' role='button') Order Ice Cream
+  br
+  div(class='row')
+    form(action='/order' method='get' class='col-sm-6 col-sm-offset-3')
+      div(class='input-group')
+        input(type='text' name='orderid' class='form-control' placeholder='Order Number')
+        span(class='input-group-btn')
+          button(class='btn btn-default') Lookup
