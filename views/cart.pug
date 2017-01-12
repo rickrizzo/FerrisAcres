@@ -3,7 +3,7 @@ extends layout
 block content
   form(action='api/orders', method='post')
     if !cake && !icecream || cake.length == 0 && icecream.length == 0
-      h3 Cart is empty.
+      h2 Cart is empty
     if cake || icecream
       table(class='table table-striped table-responsive')
         thead
