@@ -1,11 +1,14 @@
 extends layout
 
 block content
-  section
-    a(href="/cake", class="btn") Order Cake
-    a(href="/icecream", class="btn") Order Ice Cream
-  section
-    form(action='/order' method='GET')
-      article
-        input(type="text" name="orderid" placeholder="Order #")
-        input(type="submit" value="Lookup Order")
+
+  div(class='row')
+    a(href="/cake" class='btn btn-primary btn-lg col-xs-12 col-sm-3 col-sm-offset-3' role='button') Order Cake
+    a(href="/icecream" class='btn btn-primary btn-lg col-xs-12 col-sm-3' role='button') Order Ice Cream
+  br
+  div(class='row')
+    form(action='/order' method='get' class='col-sm-6 col-sm-offset-3')
+      div(class='input-group')
+        input(type='text' name='orderid' class='form-control' placeholder='Order Number')
+        span(class='input-group-btn')
+          button(class='btn btn-default') Lookup

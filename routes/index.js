@@ -17,7 +17,7 @@ function sumPrices(cake, icecream) {
     sum += moneyToInt(item.price);
   });
   icecream.forEach(item => {
-    sum += moneyToInt(item.price) * item.quantity;
+    sum += moneyToInt(item.price);
   })
   return sum;
 }
@@ -159,7 +159,8 @@ router.get('/order', (req, res, next) => {
               user: user,
               cakes: cakes,
               icecreams: ice_cream,
-              orderCount: getOrderCount(req)
+              orderCount: getOrderCount(req),
+              sum: sumPrices(cakes, ice_cream)
             });
           });
         });
@@ -174,7 +175,8 @@ router.get('/order', (req, res, next) => {
             user: user,
             cakes: cakes,
             icecreams: [],
-            orderCount: getOrderCount(req)
+            orderCount: getOrderCount(req),
+            sum: sumPrices(cakes, [])
           });
         });
       }
@@ -188,7 +190,8 @@ router.get('/order', (req, res, next) => {
             user: user,
             cakes: [],
             icecreams: ice_cream,
-            orderCount: getOrderCount(req)
+            orderCount: getOrderCount(req),
+            sum: sumPrices([], ice_cream)
           });
         });
       }

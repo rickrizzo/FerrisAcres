@@ -1,22 +1,21 @@
 extends layout
 
 block content
-
 	h2 Admin Page
-	table
+	table(class='table table-striped table-responsive')
 		thead
 			tr
-				th: p Order Id
-				th: p Order Due Date
-				th: p Paid For
-				th: p Order Completed
-				th: p Order Instructions
-				tbody
-					each order in orders
-						tr(class=o % 2 == 0 ? 'odd' : 'even')
-							td
-								a(href='/order?orderid=' + order.order_id) #{order.order_id}
-							td #{order.pickup.toLocaleString()}
-							td #{order.paid}
-							td #{order.ready}
-							td #{order.instructions}
+				th Order Id
+				th Order Due Date
+				th Paid For
+				th Order Completed
+				th Order Instructions
+		tbody
+			each order in orders
+				tr
+					td
+						a(href='/order?orderid=' + order.order_id) #{order.order_id}
+					td #{order.pickup.toLocaleString()}
+					td #{order.paid}
+					td #{order.ready}
+					td #{order.instructions}

@@ -3,60 +3,71 @@ extends layout
 block content
   h2 Cake Order Form
   form(method='post', action='/api/cakes')
-    fieldset
-      legend Cake Information
-      p
+    div(class='form-group')
+      div(class='row')
         each picture, index in pictures
-          label(for='number' + index)
-            input(type='radio' id='number' + index name='cake_number' value= index + 1)
-            img(src= 'images/' + picture)
+          div(class='col-md-2 col-sm-3 col-xs-4')
+            label(for='number' + index)
+              input(type='radio' id='number' + index name='cake_number' value= index + 1)
+              img(src= 'images/' + picture class='img-responsive img-rounded')
 
-      p
-        label(for='type') Type:
-        select(name='type')
-          each type in types
-            option(value= type.name) #{type.name}
-      p
-        label(for='size') Size:
-        select(name='size')
-          each sizedata, size in sizes
-            option(value= size) #{sizedata.display_name}
+    div(class='form-group')
+      div(class='row')
+        div(class='col-md-3 col-sm-6')
+          label(for='type') Type
+          select(name='type' class='form-control input-medium')
+            each type in types
+              option(value= type.name) #{type.name}
+        div(class='col-md-3 col-sm-6')
+          label(for='size') Size
+          select(name='size' class='form-control')
+            each sizedata, size in sizes
+              option(value= size) #{sizedata.display_name}
 
-      p
-        label(for='flavors') Flavors
-        p
-          select(name='flavor_one')
+        div(class='col-md-3 col-sm-6')
+          label(for='flavor_one') First Flavor
+          select(name='flavor_one' class='form-control')
             each flavor in flavors
               option(value= flavor.name) #{flavor.name}
-        p
-          select(name='flavor_two')
+
+        div(class='col-md-3 col-sm-6')
+          label(for='flavor_two') Second Flavor
+          select(name='flavor_two' class='form-control')
             each flavor in flavors
               option(value= flavor.name) #{flavor.name}
-      p
-        label(for='fillings') Fillings:
-        each filling in fillings
-          br
-          input(type='checkbox', name='fillings', value= filling.name)
-          | #{filling.name}
-      p
-        label(for='art_description') Art:
-      p
-        textarea(name='art_description' rows='6' cols='40' placeholder='Dream up the best cake you can')
-      p
-        label(for='colors') Colors:
-        select(name='color_one')
-          each color in colors
-            option(value= color.name) #{color.name}
-        select(name='color_two')
-          each color in colors
-            option(value= color.name) #{color.name}
-      p
-        label(for='writing') Writing:
-        input(type='', name='writing')
-      p
-        label(for='writing_color') Writing Color:
-        select(name='writing_color')
-          each color in colors
-            option(value= color.name) #{color.name}
-    p
-      input(class='btn' type='submit' value='Add to cart')
+
+    div(class='form-group')
+      div(class='row')
+        div(class='col-sm-6')
+          label(for='fillings') Fillings
+          div(class='container')
+            each filling in fillings
+              div(class='checkbox')
+                input(type='checkbox' name='fillings' value= filling.name)
+                | #{filling.name}
+        div(class='col-md-3 col-sm-6')
+          label(for='color_one') Primary Color
+          select(name='color_one' class='form-control')
+            each color in colors
+              option(value= color.name) #{color.name}
+        div(class='col-md-3 col-sm-6')
+          label(for='color_two') Secondary Color
+          select(name='color_two' class='form-control')
+            each color in colors
+              option(value= color.name) #{color.name}
+
+    div(class='form-group')
+      div(class='row')
+        div(class='col-sm-6')
+          label(for='art_description') Art
+          textarea(name='art_description' class='form-control' rows='6' placeholder='Dream up the best cake you can')
+        div(class='col-sm-6')
+          label(for='writing') Writing
+          input(type='text' name='writing' placeholder='Happy birthday!' class='form-control')
+        div(class='col-sm-6')
+          label(for='writing_color') Writing Color
+          select(name='writing_color' class='form-control')
+            each color in colors
+              option(value= color.name) #{color.name}
+
+    button(class='btn btn-primary' type='submit') Add to Cart

@@ -1,31 +1,37 @@
 doctype html
 html
   head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible" content="IE=edge")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
     title= title
-    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet')
     link(href='/stylesheets/main.css' rel='stylesheet')
 
   body
-    header
-      nav
-        ul
-          li
-            a(href='/') Home
-          li
-            a(href='/cake') Order Cake
-          li
-            a(href='/icecream') Order Ice Cream
-          li
-            a(href='/cart') Cart (#{orderCount})
-      a(href="/")
-        h1= title
-    main
+
+    nav
+      ul
+        li
+          a(href='/') Home
+        li
+          a(href='/cake') Order Cake
+        li
+          a(href='/icecream') Order Ice Cream
+        li
+          a(href='/cart') Cart (#{orderCount})
+
+      header(class='container')
+        a(href='/')
+          h1(class='page-header')= title
+
+    main(class='container')
       block content
 
-    footer
-      a(href="") Log In
-      a(href="mailto:russor3@rpi.edu?subject=Website Help") Contact
-      a(href="/admin") Admin
+    footer(class='footer')
+      div(class='container')
+        a(href='') Log In
+        a(href='mailto:russor3@rpi.edu?subject=Website Help') Contact
+        a(href='/admin') Admin
+
+    script(src='modules/jquery/dist/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')
