@@ -3,7 +3,7 @@ extends layout
 block content
   h2 Ice Cream Ordering Form
   form(method="post", action="/api/icecreams")
-    div(class='form-group')
+    div(id='orderForm' class='form-group')
       div(class='row')
         div(class='col-md-4')
           label(for='size') Size
@@ -19,7 +19,8 @@ block content
 
         div(class='col-md-4')
           label(for='quantity') Quantity
-          input(type='number' name='quantity' value='1' class='form-control')
+          input(type='number' name='quantity' value='1' min='1' class='form-control')
     div(class='form-group')
-      button(class='btn btn-default') Add another Flavor
+      //- button(class='btn btn-default' id='addFlavor') Add another Flavor
     button(class='btn btn-primary' type='submit') Add to cart
+  script(src='javascripts/ice_cream.js')

@@ -56,7 +56,7 @@ router.get('/cakes', (req, res, next) => {
 router.post('/icecreams', (req, res, next) => {
   iceCreamCtrl.createIceCream(req, res, next).then(data => {
     var token = addToToken(data, req);
-    res.cookie('ferrisacres', token).redirect("/");
+    res.cookie('ferrisacres', token).redirect('/');
   });
 });
 
