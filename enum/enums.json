@@ -1,1 +1,170 @@
-{"cake_types":[{"name":"Basic"},{"name":"Premium"}],"cake_sizes":{"6_Round":{"display_name":"6\" Round","pricing":[{"type":"Basic","price":"$14.50"},{"type":"Premium","price":"$16.00"}]},"8_Round":{"display_name":"8\" Round","pricing":[{"type":"Basic","price":"$20.00"},{"type":"Premium","price":"$22.50"}]},"10_Round":{"display_name":"10\" Round","pricing":[{"type":"Basic","price":"$27.00"},{"type":"Premium","price":"$30.00"}]},"Sheet":{"display_name":"Sheet","pricing":[{"type":"Basic","price":"$37.00"},{"type":"Premium","price":"$40.00"}]},"Heart":{"display_name":"Heart","pricing":[{"type":"Basic","price":"$18.50"},{"type":"Premium","price":"$20.50"}]}},"colors":[{"name":"Red"},{"name":"Orange"},{"name":"Royal Blue"},{"name":"Sky Blue"},{"name":"Purple"},{"name":"Teal"},{"name":"Dark Green"},{"name":"Lime Green"},{"name":"Pastel Pink"},{"name":"Hot Pink"},{"name":"Yellow"},{"name":"Black"}],"ice_cream_sizes":[{"name":"Pint","price":"$4.00"},{"name":"Quart","price":"$6.00"}],"ice_cream_flavors":[{"name":"Bad Habit"},{"name":"Bada Bing"},{"name":"Cake Batter"},{"name":"Campfire"},{"name":"Chocolate"},{"name":"Chocolate Chip"},{"name":"Coc Choc Chunk"},{"name":"Coffee Almond Fudge"},{"name":"Cookie Dough"},{"name":"Cookie Jar"},{"name":"Cookies and Creme"},{"name":"Cow Trax"},{"name":"Dark Chocolate Espresso"},{"name":"Elvis Dream"},{"name":"Grasshopper"},{"name":"MJ Rell"},{"name":"Mocha Mayhem"},{"name":"Paradise Found"},{"name":"PBC Squared"},{"name":"Razz Swirl Chip"},{"name":"Route 302 Choc. Moo"},{"name":"Salty Cow"},{"name":"Strawberry"},{"name":"Sweet Cream"},{"name":"Vanilla"}],"fillings":[{"name":"Cake Crunch","price":"$0.00"},{"name":"Oreos","price":"$2.00"},{"name":"Chocolate Chunks","price":"$2.00"},{"name":"Fudge","price":"$2.00"},{"name":"Mini Chips","price":"$2.00"},{"name":"Peanut Butter Cups","price":"$3.00"},{"name":"Nut Filling","price":"$3.00"}]}
+{
+  "cake_types": [{
+    "name": "Basic"
+  }, {
+    "name": "Premium"
+  }],
+  "cake_sizes": {
+    "6_Round": {
+      "display_name": "6\" Round",
+      "pricing": [{
+        "type": "Basic",
+        "price": "$14.50"
+      }, {
+        "type": "Premium",
+        "price": "$16.00"
+      }]
+    },
+    "8_Round": {
+      "display_name": "8\" Round",
+      "pricing": [{
+        "type": "Basic",
+        "price": "$23.00"
+      }, {
+        "type": "Premium",
+        "price": "$26.00"
+      }]
+    },
+    "10_Round": {
+      "display_name": "10\" Round",
+      "pricing": [{
+        "type": "Basic",
+        "price": "$30.00"
+      }, {
+        "type": "Premium",
+        "price": "$33.00"
+      }]
+    },
+    "Sheet": {
+      "display_name": "Sheet",
+      "pricing": [{
+        "type": "Basic",
+        "price": "$37.00"
+      }, {
+        "type": "Premium",
+        "price": "$40.00"
+      }]
+    },
+    "Heart": {
+      "display_name": "Heart",
+      "pricing": [{
+        "type": "Basic",
+        "price": "$29.50"
+      }, {
+        "type": "Premium",
+        "price": "$23.50"
+      }]
+    }
+  },
+  "colors": [{
+    "name": "Red"
+  }, {
+    "name": "Orange"
+  }, {
+    "name": "Royal Blue"
+  }, {
+    "name": "Sky Blue"
+  }, {
+    "name": "Purple"
+  }, {
+    "name": "Teal"
+  }, {
+    "name": "Dark Green"
+  }, {
+    "name": "Lime Green"
+  }, {
+    "name": "Pastel Pink"
+  }, {
+    "name": "Hot Pink"
+  }, {
+    "name": "Yellow"
+  }, {
+    "name": "Black"
+  }],
+  "ice_cream_sizes": [{
+    "name": "Pint",
+    "price": "$5.00"
+  }, {
+    "name": "Quart",
+    "price": "$9.25"
+  }, {
+    "name": "Half Gallon",
+    "price": "13.95"
+  }, {
+    "name": "Tub",
+    "price": "47.00"
+  }],
+  "ice_cream_flavors": [{
+    "name": "Bad Habit"
+  }, {
+    "name": "Bada Bing"
+  }, {
+    "name": "Cake Batter"
+  }, {
+    "name": "Campfire"
+  }, {
+    "name": "Chocolate"
+  }, {
+    "name": "Chocolate Chip"
+  }, {
+    "name": "Coc Choc Chunk"
+  }, {
+    "name": "Coffee Almond Fudge"
+  }, {
+    "name": "Cookie Dough"
+  }, {
+    "name": "Cookie Jar"
+  }, {
+    "name": "Cookies and Creme"
+  }, {
+    "name": "Cow Trax"
+  }, {
+    "name": "Dark Chocolate Espresso"
+  }, {
+    "name": "Elvis Dream"
+  }, {
+    "name": "Grasshopper"
+  }, {
+    "name": "MJ Rell"
+  }, {
+    "name": "Mocha Mayhem"
+  }, {
+    "name": "Paradise Found"
+  }, {
+    "name": "PBC Squared"
+  }, {
+    "name": "Razz Swirl Chip"
+  }, {
+    "name": "Route 302 Choc. Moo"
+  }, {
+    "name": "Salty Cow"
+  }, {
+    "name": "Strawberry"
+  }, {
+    "name": "Sweet Cream"
+  }, {
+    "name": "Vanilla"
+  }],
+  "fillings": [{
+    "name": "Cake Crunch",
+    "price": "$0.00"
+  }, {
+    "name": "Oreos",
+    "price": "$2.00"
+  }, {
+    "name": "Chocolate Chunks",
+    "price": "$2.00"
+  }, {
+    "name": "Fudge",
+    "price": "$2.00"
+  }, {
+    "name": "Mini Chips",
+    "price": "$2.00"
+  }, {
+    "name": "Peanut Butter Cups",
+    "price": "$3.00"
+  }, {
+    "name": "Nut Filling",
+    "price": "$3.00"
+  }]
+}
