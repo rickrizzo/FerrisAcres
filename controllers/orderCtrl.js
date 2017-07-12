@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const db = require('../controllers/db.js');
 
+const db = require('../controllers/db.js');
+const mail = require('../controllers/mailCtrl.js');
 const userCtrl = require('../controllers/userCtrl.js');
 const cakeCtrl = require('../controllers/cakeCtrl.js');
 const iceCreamCtrl = require('../controllers/iceCreamCtrl.js');
@@ -31,7 +32,8 @@ module.exports = {
       return yield t.any(insert_order, [user.user_id, req.body.pickup, token.cake, token.icecream, req.body.instructions]);
     })
     .then(data => {
-      res.clearCookie("ferrisacres").redirect('/thanks/' + data[0].order_id)
+      mail.sendMail(req.body.email, 'TESTING THIS');
+      res.clearCookie("ferrisacres").redirect('/thanks/' + data[0].order_id);
     })
     .catch(error => {
       return next(error);

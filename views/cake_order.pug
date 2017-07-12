@@ -46,12 +46,12 @@ block content
                 input(type='checkbox' name='fillings' value= filling.name)
                 | #{filling.name}
         div(class='col-md-3 col-sm-6')
-          label(for='color_one') Primary Color
+          label(for='color_one') Color One
           select(name='color_one' class='form-control')
             each color in colors
               option(value= color.name) #{color.name}
         div(class='col-md-3 col-sm-6')
-          label(for='color_two') Secondary Color
+          label(for='color_two') Color Two
           select(name='color_two' class='form-control')
             each color in colors
               option(value= color.name) #{color.name}
