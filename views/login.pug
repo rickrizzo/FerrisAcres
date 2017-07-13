@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h2 Login
+  form(method='post', action='api/login')
+    div(class='form-group')
+      div(class='row')
+        div(class='col-xs-6')
+          input(type='text' placeholder='username' name='username')
+    div(class='form-group')
+      div(class='row')
+        div(class='col-xs-6')
+          input(type='password' placeholder='password' name='password')
+    div(class='form-group')
+      div(class='row')
+        div(class='col-xs-6')
+          input(class='btn btn-primary' type='submit')
+  
