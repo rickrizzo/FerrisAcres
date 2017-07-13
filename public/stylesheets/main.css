@@ -5840,6 +5840,9 @@ button.close {
   margin: 0 auto;
   width: 80%; }
 
+button.btn.btn-default {
+  height: 34px; }
+
 input[type='radio'] {
   display: none; }
 

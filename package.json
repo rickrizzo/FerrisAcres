@@ -5,13 +5,14 @@
   "author": "Robert Russo <rrusso44@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "npm run build-css | node ./bin/www",
     "build-css": "./bin/build-css",
     "watch-css": "./bin/watch-css"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
     "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
@@ -19,13 +20,12 @@
     "jsonwebtoken": "^7.1.9",
     "morgan": "~1.7.0",
     "nodemailer": "^4.0.1",
+    "node-sass": "^4.5.3",
     "pg-promise": "^5.4.5",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "node-sass": "^4.5.3",
     "nodemon": "^1.11.0"
   },
   "engines": {
