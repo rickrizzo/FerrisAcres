@@ -7,6 +7,8 @@
 --
 
 -- Reset DB
+DROP EXTENSION IF EXISTS pgcrypto;
+
 DROP TRIGGER IF EXISTS price_added_cakes ON cakes;
 DROP TRIGGER IF EXISTS price_added_ice_cream ON ice_cream;
 
@@ -26,6 +28,9 @@ DROP TYPE IF EXISTS COLOR;
 DROP TYPE IF EXISTS ICE_CREAM_SIZE;
 DROP TYPE IF EXISTS FLAVOR;
 DROP TYPE IF EXISTS FILLING;
+
+-- Extensions
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 -- Enums
 CREATE TYPE CAKE_TYPE AS ENUM ('Basic', 'Premium');
@@ -65,8 +70,9 @@ CREATE TYPE FLAVOR AS ENUM(
 CREATE TABLE IF NOT EXISTS users(
   user_id INTEGER PRIMARY KEY DEFAULT make_random_id(),
   name VARCHAR(64) NOT NULL,
-  email VARCHAR(140) NOT NULL UNIQUE,
-  phone INT
+  email VARCHAR(160) UNIQUE,
+  phone INT UNIQUE,
+  password VARCHAR(72)
 );
 
 CREATE TABLE IF NOT EXISTS cakes(
@@ -169,7 +175,7 @@ RETURNS trigger AS $price_added_ice_cream$
 $price_added_ice_cream$  LANGUAGE plpgsql;
 
 -- Feistel Cipher taken from http://wiki.postgresql.org/wiki/Pseudo_encrypt
-CREATE OR REPLACE FUNCTION pseudo_encrypt(VALUE int) returns bigint AS $$
+CREATE OR REPLACE FUNCTION pseudo_encrypt(VALUE int) RETURNS bigint AS $$
 DECLARE
 l1 int;
 l2 int;
@@ -190,10 +196,19 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql strict immutable;
 
-CREATE OR REPLACE FUNCTION make_random_id() returns bigint as $$
+CREATE OR REPLACE FUNCTION make_random_id() RETURNS bigint as $$
   select pseudo_encrypt(nextval('random_int_seq')::int)
 $$ language sql;
 
+CREATE OR REPLACE FUNCTION hash_password()
+RETURNS trigger as $hashed_password$
+  BEGIN
+    IF NEW.password IS NOT NULL THEN
+      NEW.password = crypt(NEW.password, gen_salt('bf', 8));
+    END IF;
+  RETURN NEW;
+  END;
+$hashed_password$  LANGUAGE plpgsql;
 
 -- TRIGGERS
 CREATE TRIGGER price_added_cakes
@@ -203,3 +218,7 @@ CREATE TRIGGER price_added_cakes
 CREATE TRIGGER price_added_ice_cream
   BEFORE INSERT OR UPDATE ON ice_cream
   FOR EACH ROW EXECUTE PROCEDURE calculate_price_ice_cream();
+
+CREATE TRIGGER hashed_password
+  BEFORE INSERT OR UPDATE ON users
+  FOR EACH ROW EXECUTE PROCEDURE hash_password();

@@ -32,6 +32,15 @@ function getOrderCount(req) {
   return numOrders;
 }
 
+function verifyLogin(req) {
+  if(req.cookies.ferrisacres) {
+    var cert = fs.readFileSync('private.key', 'utf-8');
+    var token = jwt.verify(req.cookies.ferrisacres, cert);
+    return token.exists
+  }
+  return false;
+}
+
 function getDateNextWeekAtNoon() {
   return new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0,11) + '12:00';
 }
@@ -39,7 +48,8 @@ function getDateNextWeekAtNoon() {
 router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'Ferris Acres Creamery',
-    orderCount: getOrderCount(req)
+    orderCount: getOrderCount(req),
+    login: verifyLogin(req)
   });
 });
 
@@ -73,6 +83,13 @@ router.get('/icecream', (req, res, next) => {
       flavors: enums.ice_cream_flavors,
       orderCount: getOrderCount(req)
     });
+  });
+});
+
+router.get('/login', (req, res, next) => {
+  res.render('login', {
+    title: 'Ferris Acres Creamery',
+    orderCount: getOrderCount(req)
   });
 });
 

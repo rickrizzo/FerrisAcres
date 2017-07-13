@@ -30,8 +30,10 @@ html
 
     footer(class='footer')
       div(class='container')
-        a(href='') Log In
+        a(href='/login') Log In
         a(href='mailto:russor3@rpi.edu?subject=Website Help') Contact
-        a(href='/admin') Admin
+        case login
+          when true
+            a(href='/admin') Admin
 
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous')
