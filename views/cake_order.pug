@@ -10,7 +10,7 @@ block content
           div(class='col-md-2 col-sm-3 col-xs-4')
             label(for='number' + index)
               input(type='radio' id='number' + index name='cake_number' value= index + 1)
-              img(src= 'images/' + picture class='img-responsive img-rounded')
+              img(src= 'images/' + picture class='img-crop img-circle img-rounded')
 
     div(class='form-group')
       div(class='row')
@@ -77,3 +77,5 @@ block content
               option(value= color.name) #{color.name}
 
     button(class='btn btn-primary' type='submit') Add to Cart
+    span(class='notice') Plan ahead! Premium cakes take 3 days to prepare
+  script(src='javascripts/cake.js')
