@@ -4,6 +4,7 @@ block content
   h2 Cake Order Form
   form(method='post', action='/api/cakes')
     div(class='form-group')
+      label(for='styles') Styles
       div(class='row')
         each picture, index in pictures
           div(class='col-md-2 col-sm-3 col-xs-4')
@@ -41,10 +42,15 @@ block content
         div(class='col-sm-6')
           label(for='fillings') Fillings
           div(class='container')
-            each filling in fillings
-              div(class='checkbox')
-                input(type='checkbox' name='fillings' value= filling.name)
-                | #{filling.name}
+            div(class='checkbox')
+              each filling, index in fillings
+                if index % 4 == 0
+                  div(class='control col-md-3')
+                    each filling, inner_index in fillings
+                      if inner_index >= index && inner_index < index + 4
+                        label(class='checkbox')
+                          input(type='checkbox' name='fillings' value= filling.name)
+                          | #{filling.name}
         div(class='col-md-3 col-sm-6')
           label(for='color_one') Color One
           select(name='color_one' class='form-control')
@@ -60,7 +66,7 @@ block content
       div(class='row')
         div(class='col-sm-6')
           label(for='art_description') Art
-          textarea(name='art_description' class='form-control' rows='6' placeholder='Dream up the best cake you can')
+          textarea(name='art_description' class='form-control' rows='4' placeholder='Dream up the best cake you can')
         div(class='col-sm-6')
           label(for='writing') Writing
           input(type='text' name='writing' placeholder='Happy birthday!' class='form-control')

@@ -42,8 +42,15 @@ button.btn.btn-default {
 input[type='radio'] {
   display: none;
 }
+input[type='radio'] + img {
+  width: 158px;
+  height: 211px;
+}
 input[type='radio']:checked + img {
-  box-shadow: 0px 0px 10px 0px black;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 5px solid maroon;
 }
 
 nav {
