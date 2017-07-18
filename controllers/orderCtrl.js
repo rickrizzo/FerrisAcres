@@ -32,7 +32,7 @@ module.exports = {
       return yield t.any(insert_order, [user.user_id, req.body.pickup, token.cake, token.icecream, req.body.instructions]);
     })
     .then(data => {
-      mail.sendMail(req.body.email, 'TESTING THIS');
+      mail.sendMail(req.body.email, '<h1>Thank You!</h1><p>Thank you for placing your order with Ferris Acres Creamery! You can check the status of this order at any time by going by <a href="https://creamery.herokuapp.com/order?orderid=' + data[0].order_id + '" >clicking here</a>.</p><p>Happy trails!</p>');
       res.clearCookie("ferrisacres").redirect('/thanks/' + data[0].order_id);
     })
     .catch(error => {
