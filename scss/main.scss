@@ -35,6 +35,18 @@ header a:hover {
   width: 80%;
 }
 
+.img-crop {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.notice {
+  margin: 0 1em;
+  color: grey;
+}
+
 button.btn.btn-default {
   height: 34px;
 }
@@ -42,8 +54,12 @@ button.btn.btn-default {
 input[type='radio'] {
   display: none;
 }
+
 input[type='radio']:checked + img {
-  box-shadow: 0px 0px 10px 0px black;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 5px solid maroon;
 }
 
 nav {

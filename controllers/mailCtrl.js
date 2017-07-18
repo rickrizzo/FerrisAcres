@@ -8,20 +8,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const mailOptions = {
-  from: 'russorob@aol.com',
-  to: 'rrusso44@icloud.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
-
 module.exports = {
   sendMail: function(address, content) {
     return transporter.sendMail({
       from: 'russorob@aol.com',
       to: address,
-      subject: 'Ferris Acres Creamery - Order Confirmation',
-      text: content
+      subject: '🐮🍦 Order Confirmation',
+      html: content
     }, function(error, info){
       if (error) {
         console.log(error);

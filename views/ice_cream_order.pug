@@ -5,6 +5,8 @@ block content
   form(method="post", action="/api/icecreams")
     div(id='orderForm' class='form-group')
       div(class='row')
+        div(class='col-md-12')
+          h4 Flavor 1
         div(class='col-md-4')
           label(for='size') Size
           select(name='size' class='form-control')
@@ -20,7 +22,8 @@ block content
         div(class='col-md-4')
           label(for='quantity') Quantity
           input(type='number' name='quantity' value='1' min='1' class='form-control')
-    div(class='form-group')
-      //- button(class='btn btn-default' id='addFlavor') Add another Flavor
+            
+    //- div(class='form-group')
+    //-   button(class='btn btn-default' id='addFlavor') Add another Flavor
     button(class='btn btn-primary' type='submit') Add to cart
   script(src='javascripts/ice_cream.js')

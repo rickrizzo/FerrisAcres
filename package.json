@@ -1,8 +1,7 @@
 {
   "name": "FerrisAcres",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "An ice cream ordering system",
-  "author": "Robert Russo <rrusso44@gmail.com>",
   "private": true,
   "scripts": {
     "start": "npm run build-css | node ./bin/www",
@@ -31,5 +30,10 @@
   "engines": {
     "node": ">= 8.1.4",
     "npm": ">= 3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rickrizzo/FerrisAcres"
+  },
+  "author": "Robert Russo <rrusso44@gmail.com>"
 }
